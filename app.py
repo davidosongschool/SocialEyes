@@ -1,5 +1,6 @@
 import os
 import bcrypt
+import datetime
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
 from flask import Flask, render_template, redirect, request, url_for
@@ -28,9 +29,16 @@ def register_user():
     users = mongo.db.users
     encrypted = bcrypt.hashpw(
         request.form['password'].encode('utf-8'), bcrypt.gensalt())
+    date = datetime.datetime.now()
     users.insert({'username': request.form['username'],
-                  'password': encrypted, 'email': request.form['email']})
-
+                  'password': encrypted,
+                  'email': request.form['email'],
+                  'date_registered': date,
+                  'description': 'Tell Us About Yourself',
+                  'following': (1, 2, 3),
+                  'followers': (3, 2, 1),
+                  'discover': True,
+                  'avater': 'Choose a picture'})
     return 'Go to the new Dashboard Here'
 
 
