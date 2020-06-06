@@ -30,16 +30,17 @@ def register_user():
     encrypted = bcrypt.hashpw(
         request.form['password'].encode('utf-8'), bcrypt.gensalt())
     date = datetime.datetime.now()
-    users.insert({'username': request.form['username'],
-                  'password': encrypted,
-                  'email': request.form['email'],
-                  'date_registered': date,
-                  'description': 'Tell Us About Yourself',
-                  'following': (1, 2, 3),
-                  'followers': (3, 2, 1),
-                  'discover': True,
-                  'avater': 'Choose a picture'})
-    return 'Go to the new Dashboard Here'
+    users.insert_one({'username': request.form['username'],
+                       'password': encrypted,
+                       'email': request.form['email'],
+                       'date_registered': date,
+                       'description': 'Tell Us About Yourself',
+                       'following': (1, 2, 3),
+                       'followers': (3, 2, 1),
+                       'discover': True,
+                       'avater': 'Choose a picture'})
+
+    return render_template('dashboard.html', user = users.find_one({'username': request.form['username']}))
 
 
 if __name__ == '__main__':
