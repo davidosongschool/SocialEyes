@@ -38,14 +38,29 @@
 
 <!--View Posts-->
 <!--Your Own latest Post-->
+<div class="container my-latest-post">
+<div class="row">
+<div class="col-4">
+<ul>
+        <li><i class="far fa-user pr-1"></i>{{my_own_post.posted_by}}</li>
+        <li><i class="far fa-calendar-alt pr-1"></i>{{my_own_post.date_posted}}</li>
+      </ul>
+</div>
+<div class="col-8">
+    {{my_own_post.main_content}}
+    </div>
+</div>
+</div>
+
+<!--Followers Posts-->
 <div class="contain-posts-section">
 {% for n in posts_to_display %}
 <div class="container">
   <div class="row">
     <div class="col-4">
       <ul>
-        <li>{{n['posted_by']}}</li>
-        <li>2</li>
+        <li><i class="far fa-user pr-1"></i>{{n['posted_by']}}</li>
+        <li><i class="far fa-calendar-alt pr-1"></i>{{n['date_posted']}}</li>
       </ul>
     </div>
     <div class="col-8">

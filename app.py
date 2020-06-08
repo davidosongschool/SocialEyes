@@ -33,15 +33,17 @@ def dashboard():
         user = users.find_one({'username': session['username']})
         posts = mongo.db.posts
         # Display your own latest post
-        display_post = posts.find_one({'posted_by': session['username']})
+        my_own_post = posts.find_one({'posted_by': session['username']}, sort=[
+                                     ('_id', -1)])
+        print(my_own_post)
         following = user['following']
         posts_to_display = []
         for username in following:
             # Find the latest post be each user the follow
             latest_post = posts.find_one({'posted_by': username})
             posts_to_display.extend([latest_post])
-        print(posts_to_display)
-        return render_template('dashboard.html', user=user, posts=display_post,posts_to_display=posts_to_display)
+
+        return render_template('dashboard.html', user=user, my_own_post=my_own_post, posts_to_display=posts_to_display)
     return render_template('landing.html')
 
 
@@ -74,7 +76,7 @@ def register_user():
     users = mongo.db.users
     encrypted = bcrypt.hashpw(
         request.form['password'].encode('utf-8'), bcrypt.gensalt())
-    date = datetime.date()
+    date = str(datetime.date.today())
     users.insert_one({'username': request.form['username'],
                       'password': encrypted,
                       'email': request.form['email'],
@@ -92,7 +94,7 @@ def register_user():
 @ app.route('/make_post', methods=["POST"])
 def make_post():
     posts = mongo.db.posts
-    date = datetime.date()
+    date = str(datetime.date.today())
     posts.insert_one({'main_content': request.form['main_content'],
                       'posted_by': session['username'],
                       'date_posted': date,
