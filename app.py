@@ -133,7 +133,6 @@ def find():
 @ app.route('/start_following', methods=['POST'])
 def start_following():
     users = mongo.db.users
-    account = users.find_one({'username': session['username']})
     users.update({'username': session['username']}, {
                  "$push": {'following': request.form['follow_username']}})
 
@@ -143,6 +142,14 @@ def start_following():
 @ app.route('/settings')
 def settings():
     return render_template('settings.html')
+
+
+@ app.route('/about_me', methods=['POST'])
+def about_me():
+    users = mongo.db.users
+    users.update({'username': session['username']}, {"$set": {
+                 'description': request.form['description']}})
+    return redirect(url_for('dashboard'))
 
 
 if __name__ == '__main__':

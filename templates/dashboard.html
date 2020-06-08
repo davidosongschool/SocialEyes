@@ -11,12 +11,37 @@
         <li><span class="username">{{user.username}}</span></li>
         <li>
           <span class="description">{{user.description}}</span
-          ><i class="far fa-edit edit-desc"></i>
+          ><i class="far fa-edit edit-desc" data-toggle="modal" data-target="#aboutmeModal"></i>
         </li>
       </ul>
     </div>
   </div>
 </div>
+
+<!--About Modal-->
+<div class="modal fade" id="aboutmeModal" tabindex="-1" role="dialog" aria-labelledby="aboutmeModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Tell Us About Yourself</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action="{{url_for('about_me')}}" method="POST">
+        <textarea name="description"  placeholder="About me..." maxlength="60"></textarea>
+        <button type="submit" class="btn btn-primary m-2">Save</button>
+        </form>
+        <button type="button" class="btn btn-secondary m-2" data-dismiss="modal">Close</button>
+       
+      </div>
+     
+    </div>
+  </div>
+</div>
+
+
 <div class="contain-entire-post">
 <!--Write a post-->
 <div class="container">
@@ -79,6 +104,6 @@
   </div>
 </div>
 
-</section>
+
 
 {% endblock %}
