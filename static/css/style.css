@@ -140,6 +140,15 @@ padding: 20px;
     border-bottom: 2px solid lightgray;
 }
 
+.username {
+    font-weight: 600 !important;
+}
+
+.description {
+    font-size: 12px !important;
+    
+}
+
 /* 3. Posts -------------------- */
 
 .contain-entire-post {
