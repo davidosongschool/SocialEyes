@@ -1,5 +1,40 @@
+{% extends 'nav.html' %}
+
+{% block content %}
+
+<div class="container">
+<div class="row mt-2">
+<div class="col-4">
+<img src="{{ user.avatar }}" class="avatar">
+</div>
+<div class="col-8">
+<ul>
+<li><span class="username">{{user.username}}</span></li>
+<li><span class="description">{{user.description}}</span><i class="far fa-edit edit-desc"></i></li>
+</ul>
+</div>
+</div>
+<hr />
+</div>
 
 
-<h5>{{ user.email }}</h5>
+<div class="container footer-menu fixed-bottom">
+<div class="row">
+<div class="col-3">
+Menu 1 
+</div>
+<div class="col-3">
+Menu 2
+</div>
+<div class="col-3">
+Menu 3 
+</div>
+<div class="col-3">
+Menu 4
+</div>
+</div>
+</div>
 
-<h5>{{ user.description }}</h5>
+
+
+{% endblock %}

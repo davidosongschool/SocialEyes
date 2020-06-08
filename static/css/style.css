@@ -1,0 +1,47 @@
+/* ---------------------------------
+
+SocialEyes Css Styling 
+
+Key:
+
+1. Presets
+2. Dashboard 
+2.1 User section
+3. Posts
+4. Footer Menu
+------------------------------------ */
+
+/* 1. Presets  ------------- */
+
+ul {
+list-style: none;
+}
+
+ul li {
+    text-decoration: none;
+}
+
+
+/* 2. Dashboard ---------------- */ 
+
+/* 2.1 User Section */ 
+
+.avatar {
+    height: 60px;
+    width: 60px;
+    padding: 10px;
+    border: 2px solid lightgrey;
+    border-radius: 30px;
+}
+
+.edit-desc {
+    margin-left: 5px;
+}
+
+
+/* Footer Menu ---------------- */
+
+.footer-menu {
+    height: 6vh;
+    background-color: rgb(236, 231, 231);
+}
