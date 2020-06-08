@@ -81,7 +81,7 @@ def login_user():
 @ app.route('/logout')
 def logout():
     session.clear()
-    return redirect(url_for('login'))
+    return redirect(url_for('landing'))
 
 
 @ app.route('/register_user', methods=['POST', 'GET'])
@@ -139,7 +139,10 @@ def start_following():
 
     return redirect(url_for('dashboard'))
 
-# Add a route to display the entire profile of a user (All Posts)
+
+@ app.route('/settings')
+def settings():
+    return render_template('settings.html')
 
 
 if __name__ == '__main__':

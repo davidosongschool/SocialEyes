@@ -5,45 +5,97 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>SocialEyes</title>
-
+	<link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}" type="text/css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css"
 		integrity="sha256-aAr2Zpq8MZ+YA/D6JtRD3xtrwpEz2IqOS+pWD/7XKIw=" crossorigin="anonymous" />
 </head>
 
 <body>
-	<div class="container">
-		<div class="row m-3">
-			<div class="col-12 text-center">
-				<h2>Welcome to SocialEyes</h2>
+	<div class="page-container">
+		<div class="container contain-logo">
+			<div class="row">
+				<div class="col-12 text-center">
+					<img src="static/images/logo.png" class="landing-logo image-responsive">
 			</div>
 
-		</div>
-		<div class="row m-3">
-			<div class="col-12 text-center">
-				<h4>Register</h4>
-				<form method="POST" action="{{ url_for('register_user') }}">
-					<div class="row">
-						<div class="col-12 m-3">
-							<input type="text" class="form-control" placeholder="Usermane" id="username" name="username">
-    </div>
-							<div class="col-12 m-3">
-								<input type="password" class="form-control" placeholder="Password" id="password" name="password">
-    </div>
-    			<div class="col-12 m-3">
-								<input type="email" class="form-control" placeholder="Email" id="email" name="email">
-    </div>
+				</div>
+			</div>
 
-            <button class="btn btn-light" type="submit" name="action">Register
+            <!--Contain Register Form-->
+			<div class="container contain-form contain-register">
+				<div class="row">
+					<div class="col-12 text-center">
+                        <ul class="open-menu-list">
+						<li class="open-menu pr-1 underline open-menu-signup">Sign Up</li>
+                        <li class="open-menu pl-1 not-selected open-menu-login">Login</li>
+                        </ul>
+						<form method="POST" action="{{ url_for('register_user') }}">
+							<div class="row">
+								<div class="col-12 mt-4">
+									<input type="text" class="form-control" placeholder="Usermane" id="username" name="username">
+    </div>
+									<div class="col-12 mt-1">
+										<input type="password" class="form-control" placeholder="Password" id="password" name="password">
+    </div>
+										<div class="col-12 mt-1">
+											<input type="email" class="form-control" placeholder="Email" id="email" name="email">
+    </div>
+        <div class="col-12">
+											<button class="btn btn-light register-button" type="submit" name="action">Register
              </button>
-        </div></form>
-							</div>
-				
-			</div>
-		</div>
+             </div>
+             <p class="already-have-account pt-3">Already have an account? <span class="underline open-menu-login">Login here</span></p>
+										</div>
+						</form>
+					</div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+				</div>
+			</div>
+		
+
+        <!--Contain Login Form-->
+			<div class="container contain-form contain-login d-none">
+				<div class="row">
+					<div class="col-12 text-center">
+                        <ul class="open-menu-list">
+						<li class="open-menu pr-1 not-selected open-menu-signup">Sign Up</li>
+                        <li class="open-menu pl-1 underline open-menu-login">Login</li>
+                        </ul>
+						<form method="POST" action="{{ url_for('login_user') }}">
+					<div class="row">
+						<div class="col-12 mt-4">
+							<input type="text" class="form-control" placeholder="Usermane" name="username">
+    </div>
+							<div class="col-12 mt-1">
+								<input type="password" class="form-control" placeholder="Password" name="password">
+    </div>
+                <div class="col-12">
+   
+            <button class="btn btn-light register-button" type="submit" name="action">Login
+             </button>
+             </div>
+            <p class="already-have-account pt-3">Don't have an account? <span class="underline open-menu-signup">Sign Up here</span></p>
+
+        </div>
+        	</form>
+					</div>
+
+				</div>
+			</div>
+        
+        
+        
+        
+        
+        
+        </div>
+
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"
+		integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.min.js"
 		integrity="sha256-OFRAJNoaD8L3Br5lglV7VyLRf0itmoBzWUoM+Sji4/8=" crossorigin="anonymous"></script>
+        <script src="static/js/nav.js"></script>
 </body>
 
 </html>

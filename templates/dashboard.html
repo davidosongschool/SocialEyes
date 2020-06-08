@@ -1,7 +1,7 @@
 {% extends 'nav.html' %} {% block content %}
 
 <!--User About Section -->
-<div class="container-fluid">
+<div class="container-fluid contain-user-info">
   <div class="row mt-2">
     <div class="col-4">
       <img src="{{ user.avatar }}" class="avatar" />
@@ -16,9 +16,8 @@
       </ul>
     </div>
   </div>
-  <hr />
 </div>
-
+<div class="contain-entire-post">
 <!--Write a post-->
 <div class="container">
   <div class="row">
@@ -55,7 +54,7 @@
 <!--Followers Posts-->
 <div class="contain-posts-section">
 {% for n in posts_to_display %}
-<div class="container">
+<div class="container contain-post">
   <div class="row">
     <div class="col-4">
       <ul>
@@ -71,7 +70,7 @@
 </div>
 
 {% endfor %}
-
+</div>
 <!--NEED SOME LOGIN HERE TO GENERATE POSTS - GET POSTS IN PYTHON-->
 <div class="container post-container">
   <div class="row">
