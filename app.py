@@ -35,12 +35,13 @@ def dashboard():
         # Display your own latest post
         my_own_post = posts.find_one({'posted_by': session['username']}, sort=[
                                      ('_id', -1)])
-        print(my_own_post)
+
         following = user['following']
         posts_to_display = []
         for username in following:
             # Find the latest post be each user the follow
-            latest_post = posts.find_one({'posted_by': username})
+            latest_post = posts.find_one({'posted_by': username}, sort=[
+                ('_id', -1)])
             posts_to_display.extend([latest_post])
 
         return render_template('dashboard.html', user=user, my_own_post=my_own_post, posts_to_display=posts_to_display)
@@ -65,6 +66,12 @@ def login_user():
             return redirect(url_for('dashboard'))
 
     return 'Invalid username/password combination'
+
+
+@ app.route('/logout')
+def logout():
+    session.clear()
+    return redirect(url_for('login'))
 
 
 @ app.route('/register_user', methods=['POST', 'GET'])
@@ -100,6 +107,16 @@ def make_post():
                       'date_posted': date,
                       'liked_by': (''),
                       'content_link': ''})
+    return redirect(url_for('dashboard'))
+
+
+@ app.route('/start_following', methods=['POST'])
+def start_following():
+    users = mongo.db.users
+    account = users.find_one({'username': session['username']})
+    users.update({'username': session['username']}, {
+                 "$push": {'following': request.form['follow_username']}})
+
     return redirect(url_for('dashboard'))
 
 
