@@ -1,40 +1,85 @@
-{% extends 'nav.html' %}
+{% extends 'nav.html' %} {% block content %}
 
-{% block content %}
+<!--User About Section -->
+<div class="container-fluid">
+  <div class="row mt-2">
+    <div class="col-4">
+      <img src="{{ user.avatar }}" class="avatar" />
+    </div>
+    <div class="col-8">
+      <ul>
+        <li><span class="username">{{user.username}}</span></li>
+        <li>
+          <span class="description">{{user.description}}</span
+          ><i class="far fa-edit edit-desc"></i>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <hr />
+</div>
 
+<!--Write a post-->
 <div class="container">
-<div class="row mt-2">
-<div class="col-4">
-<img src="{{ user.avatar }}" class="avatar">
-</div>
-<div class="col-8">
-<ul>
-<li><span class="username">{{user.username}}</span></li>
-<li><span class="description">{{user.description}}</span><i class="far fa-edit edit-desc"></i></li>
-</ul>
-</div>
-</div>
-<hr />
-</div>
-
-
-<div class="container footer-menu fixed-bottom">
-<div class="row">
-<div class="col-3">
-Menu 1 
-</div>
-<div class="col-3">
-Menu 2
-</div>
-<div class="col-3">
-Menu 3 
-</div>
-<div class="col-3">
-Menu 4
-</div>
-</div>
+  <div class="row">
+    <div class="col-12">
+      <form action="{{url_for('make_post')}}" method="POST">
+        <input
+          type="text"
+          name="main_content"
+          placeholder="Type your post here"
+        />
+        <button type="submit" class="btn btn-success">Post</button>
+      </form>
+    </div>
+  </div>
 </div>
 
 
+<!--View Posts-->
+<!--Your Own latest Post-->
+<div class="contain-posts-section">
+{% for n in posts_to_display %}
+<div class="container">
+  <div class="row">
+    <div class="col-4">
+      <ul>
+        <li>{{n['posted_by']}}</li>
+        <li>2</li>
+      </ul>
+    </div>
+    <div class="col-8">
+    {{n['main_content']}}
+    </div>
+  </div>
+</div>
+</div>
+
+{% endfor %}
+
+<!--NEED SOME LOGIN HERE TO GENERATE POSTS - GET POSTS IN PYTHON-->
+<div class="container post-container">
+  <div class="row">
+    <div class="col-12"></div>
+  </div>
+</div>
+
+<!--Footer Menu-->
+<div class="container-fluid footer-menu">
+  <div class="row">
+    <div class="col-3">
+      Menu 1
+    </div>
+    <div class="col-3">
+      Menu 2
+    </div>
+    <div class="col-3">
+      Menu 3
+    </div>
+    <div class="col-3">
+      Menu 4
+    </div>
+  </div>
+</div>
 
 {% endblock %}

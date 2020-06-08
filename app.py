@@ -31,22 +31,31 @@ def landing():
 def dashboard():
     if 'username' in session:
         user = users.find_one({'username': session['username']})
-        return render_template('dashboard.html', user=user)
+        posts = mongo.db.posts
+        # Display your own latest post
+        display_post = posts.find_one({'posted_by': session['username']})
+        following = user['following']
+        posts_to_display = []
+        for username in following:
+            # Find the latest post be each user the follow
+            latest_post = posts.find_one({'posted_by': username})
+            posts_to_display.extend([latest_post])
+        print(posts_to_display)
+        return render_template('dashboard.html', user=user, posts=display_post,posts_to_display=posts_to_display)
     return render_template('landing.html')
 
 
-@app.route('/login')
+@ app.route('/login')
 def login():
     if 'username' in session:
         return redirect(url_for('dashboard'))
     return render_template('login.html')
 
 
-
-@app.route('/login_user', methods=['POST'])
+@ app.route('/login_user', methods=['POST'])
 def login_user():
     users = mongo.db.users
-    login_user = users.find_one({'username' : request.form['username']})
+    login_user = users.find_one({'username': request.form['username']})
 
     if login_user:
         if bcrypt.hashpw(request.form['password'].encode('utf-8'), login_user['password']) == login_user['password']:
@@ -56,33 +65,44 @@ def login_user():
     return 'Invalid username/password combination'
 
 
-
-@app.route('/register_user', methods=['POST', 'GET'])
+@ app.route('/register_user', methods=['POST', 'GET'])
 def register_user():
     if 'username' in session:
         return redirect(url_for('dashboard'))
 
-    #Still need to check if the username or email already existsÏ
+    # Still need to check if the username or email already existsÏ
     users = mongo.db.users
     encrypted = bcrypt.hashpw(
-    request.form['password'].encode('utf-8'), bcrypt.gensalt())
-    date = datetime.datetime.now()
+        request.form['password'].encode('utf-8'), bcrypt.gensalt())
+    date = datetime.date()
     users.insert_one({'username': request.form['username'],
-                        'password': encrypted,
-                        'email': request.form['email'],
-                        'date_registered': date,
-                        'description': 'Tell Us About Yourself',
-                        'following': (1, 2, 3),
-                        'followers': (3, 2, 1),
-                        'discover': True,
-                        'avatar': 'Choose a picture'})
+                      'password': encrypted,
+                      'email': request.form['email'],
+                      'date_registered': date,
+                      'description': 'Tell Us About Yourself',
+                      'following': (1, 2, 3),
+                      'followers': (3, 2, 1),
+                      'discover': True,
+                      'avatar': 'Choose a picture'})
 
     session['username'] = request.form['username']
     return redirect(url_for('dashboard'))
 
 
+@ app.route('/make_post', methods=["POST"])
+def make_post():
+    posts = mongo.db.posts
+    date = datetime.date()
+    posts.insert_one({'main_content': request.form['main_content'],
+                      'posted_by': session['username'],
+                      'date_posted': date,
+                      'liked_by': (''),
+                      'content_link': ''})
+    return redirect(url_for('dashboard'))
+
+
 if __name__ == '__main__':
-    app.secret_key = 'Clodyoneill1' #Needs to be an environment var
+    app.secret_key = 'Clodyoneill1'  # Needs to be an environment var
     app.run(host=os.environ.get('IP'),
             port=int(os.environ.get('PORT')),
             debug=True)
