@@ -35,9 +35,11 @@ def dashboard():
         # Display your own latest post
         my_own_post = posts.find_one({'posted_by': session['username']}, sort=[
                                      ('_id', -1)])
-
-        following = user['following']
+        following = []                             
+        if user['following']:
+            following = user['following']
         posts_to_display = []
+
         for username in following:
             # Find the latest post be each user the follow
             latest_post = posts.find_one({'posted_by': username}, sort=[
@@ -89,8 +91,8 @@ def register_user():
                       'email': request.form['email'],
                       'date_registered': date,
                       'description': 'Tell Us About Yourself',
-                      'following': (1, 2, 3),
-                      'followers': (3, 2, 1),
+                      'following': (""),
+                      'followers': (""),
                       'discover': True,
                       'avatar': 'Choose a picture'})
 
