@@ -5,6 +5,7 @@ from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
 from flask import Flask, render_template, redirect, request, url_for, session
 from os import path
+import requests
 if path.exists("env.py"):
     import env
 
@@ -150,6 +151,17 @@ def about_me():
     users.update({'username': session['username']}, {"$set": {
                  'description': request.form['description']}})
     return redirect(url_for('dashboard'))
+
+
+@ app.route('/get_news')
+def get_news():
+    url = ('http://newsapi.org/v2/top-headlines?'
+           'country=ie&'
+           'apiKey=a486387335cd46e0a3c0cb8614fdc4ef')
+
+    response = requests.get(url)
+
+    return render_template('news.html', response=response.json())
 
 
 if __name__ == '__main__':

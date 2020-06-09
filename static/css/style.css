@@ -11,7 +11,8 @@ Key:
 3. Posts
 3.1 Write a post 
 3.2 View Posts
-4. Footer Menu
+4. News
+5. Footer Menu
 
 ------------------------------------ */
 
@@ -190,9 +191,23 @@ background-color: aliceblue;
     font-size: 12px;
 }
 
+/* 4. ----------------- News */
+.news-container {
+    margin-bottom: 200px;
+}
+
+.news-card{
+    margin: 10px;
+} 
+
+.news-button {
+    color: white !important;
+    border: none !important;
+    background-color: #45B5AC !important;
+}
 
 
-/* 4. Footer Menu ---------------- */
+/* 5. Footer Menu ---------------- */
 
 .footer-menu {
     height: 8vh;
