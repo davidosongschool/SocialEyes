@@ -29,9 +29,10 @@
 						<li class="open-menu pr-1 underline open-menu-signup">Sign Up</li>
                         <li class="open-menu pl-1 not-selected open-menu-login">Login</li>
                         </ul>
+                        <h6 class="error_message">{{error}}</h6>
 						<form method="POST" action="{{ url_for('register_user') }}">
 							<div class="row">
-								<div class="col-12 mt-4">
+								<div class="col-12">
 									<input type="text" class="form-control shadow-sm" placeholder="Usermane" id="username" name="username">
     </div>
 									<div class="col-12 mt-1">
@@ -61,6 +62,7 @@
 						<li class="open-menu pr-1 not-selected open-menu-signup">Sign Up</li>
                         <li class="open-menu pl-1 underline open-menu-login">Login</li>
                         </ul>
+                        <h6 class="error_message">{{error_2}}</h6>
 						<form method="POST" action="{{ url_for('login_user') }}">
 					<div class="row">
 						<div class="col-12 mt-4">

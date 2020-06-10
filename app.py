@@ -70,7 +70,7 @@ def dashboard():
 @ app.route('/login')
 def login():
     if 'username' in session:
-        return redirect(url_for('dashboard'))
+        return redirect(url_for('dashboard'))    
     return render_template('login.html')
 
 
@@ -84,7 +84,8 @@ def login_user():
             session['username'] = request.form['username']
             return redirect(url_for('dashboard'))
 
-    return 'Invalid username/password combination'
+    error = "Incorrect Login! Try Again"
+    return render_template('landing.html', error_2=error)
 
 
 @ app.route('/logout')
@@ -119,7 +120,8 @@ def register_user():
 
         session['username'] = request.form['username']
         return redirect(url_for('dashboard'))
-    return 'Username already exists! Please choose a different one'
+    error = "User Already Exists!"
+    return render_template('landing.html', error=error)
 
 
 @ app.route('/make_post', methods=["POST"])
@@ -147,21 +149,26 @@ def find():
 
 @ app.route('/search_results', methods=['POST'])
 def search_results():
+    rendered = 'false'
     searched = request.form['searched_user']
-
+    # Don't show yourself in search results
+    my_username = session['username']
     users.mongo.db.users
-    results = users.find({'username': { '$regex' : searched, '$options' : 'i' }})
+    user = users.find_one({'username': my_username})
 
-    return render_template('follow.html', results=results)
+    results = users.find({'username': {'$regex': searched, '$options': 'i'}})
+    # Check that they don't already follow them
+    # check if user['following'] contains specific_result.username
+    return render_template('follow.html', results=results, my_username=my_username, user=user)
 
 
-""" @ app.route('/start_following', methods=['POST'])
+@ app.route('/start_following', methods=['POST'])
 def start_following():
     users = mongo.db.users
     users.update({'username': session['username']}, {
                  "$push": {'following': request.form['follow_username']}})
 
-    return redirect(url_for('dashboard')) """
+    return redirect(url_for('dashboard'))
 
 
 @ app.route('/settings')
