@@ -70,7 +70,7 @@ def dashboard():
 @ app.route('/login')
 def login():
     if 'username' in session:
-        return redirect(url_for('dashboard'))    
+        return redirect(url_for('dashboard'))
     return render_template('login.html')
 
 
@@ -85,7 +85,9 @@ def login_user():
             return redirect(url_for('dashboard'))
 
     error = "Incorrect Login! Try Again"
-    return render_template('landing.html', error_2=error)
+    bs = "d-none"
+    bs2 = "d-block"
+    return render_template('landing.html', error_2=error, bs=bs, bs2=bs2)
 
 
 @ app.route('/logout')
@@ -100,10 +102,12 @@ def register_user():
         return redirect(url_for('dashboard'))
     users = mongo.db.users
     entered_username = request.form['username'].lower()
+    entered_email = request.form['email'].lower()
     existing_user = users.find_one({'username': entered_username})
+    existing_email = users.find_one({'email': entered_email})
     # Check if the username or email already existsÏ
 
-    if existing_user is None:
+    if existing_user is None and existing_email is None:
 
         encrypted = bcrypt.hashpw(
             request.form['password'].encode('utf-8'), bcrypt.gensalt())
@@ -120,7 +124,7 @@ def register_user():
 
         session['username'] = request.form['username']
         return redirect(url_for('dashboard'))
-    error = "User Already Exists!"
+    error = "Username or Email already exists!"
     return render_template('landing.html', error=error)
 
 
