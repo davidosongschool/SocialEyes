@@ -4,106 +4,253 @@
 <div class="container-fluid contain-user-info">
   <div class="row mt-2">
     <div class="col-4">
-      <img src="{{ user.avatar }}" class="avatar" />
+      <img
+        src="{{ user.avatar }}"
+        class="avatar"
+        data-toggle="modal"
+        data-target="#changeavatarModal"
+      />
     </div>
     <div class="col-8">
       <ul>
         <li><span class="username">{{user.username}}</span></li>
         <li>
           <span class="description">{{user.description}}</span
-          ><i class="far fa-edit edit-desc" data-toggle="modal" data-target="#aboutmeModal"></i>
+          ><i
+            class="far fa-edit edit-desc"
+            data-toggle="modal"
+            data-target="#aboutmeModal"
+          ></i>
         </li>
       </ul>
     </div>
   </div>
 </div>
 
-<!--About Modal-->
-<div class="modal fade" id="aboutmeModal" tabindex="-1" role="dialog" aria-labelledby="aboutmeModalLabel" aria-hidden="true">
+<!--Change Avatar Modal-->
+<div
+  class="modal fade"
+  id="changeavatarModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="changeavatarLabel"
+  aria-hidden="true"
+>
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Tell Us About Yourself</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <h5 class="modal-title" id="exampleModalLabel">Choose an Avatar</h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body text-center">
+        <!--Display available avatars-->
+        <ul class="choose-avatar-list">
+          <li>
+            <form action="{{url_for('change_avatar')}}" method="POST">
+              <button
+                type="submit"
+                name="avatar-change"
+                value="https://i.ibb.co/MsyTq8J/male2.png"
+              >
+                <img
+                  src="https://i.ibb.co/MsyTq8J/male2.png"
+                  alt="avatar-one"
+                />
+              </button>
+            </form>
+          </li>
+          <li>
+            <form action="{{url_for('change_avatar')}}" method="POST">
+              <button
+                type="submit"
+                name="avatar-change"
+                value="https://i.ibb.co/0fTHwCQ/female.png"
+              >
+                <img
+                  src="https://i.ibb.co/0fTHwCQ/female.png"
+                  alt="avatar-two"
+                />
+              </button>
+            </form>
+          </li>
+          <li>
+            <form action="{{url_for('change_avatar')}}" method="POST">
+              <button
+                type="submit"
+                name="avatar-change"
+                value="https://i.ibb.co/N9q0L0D/female2.png"
+              >
+                <img
+                  src="https://i.ibb.co/N9q0L0D/female2.png"
+                  alt="avatar-three"
+                />
+              </button>
+            </form>
+          </li>
+          <li>
+            <form action="{{url_for('change_avatar')}}" method="POST">
+              <button
+                type="submit"
+                name="avatar-change"
+                value="https://i.ibb.co/LJ5jfdG/avataaars.png"
+              >
+                <img
+                  src="https://i.ibb.co/LJ5jfdG/avataaars.png"
+                  alt="avatar-four"
+                />
+              </button>
+            </form>
+          </li>
+          <li>
+            <form action="{{url_for('change_avatar')}}" method="POST">
+              <button
+                type="submit"
+                name="avatar-change"
+                value="https://i.ibb.co/PwBn8M6/sunny.png"
+              >
+                <img
+                  src="https://i.ibb.co/PwBn8M6/sunny.png"
+                  alt="avatar-five"
+                />
+              </button>
+            </form>
+          </li>
+          <li>
+            <form action="{{url_for('change_avatar')}}" method="POST">
+              <button
+                type="submit"
+                name="avatar-change"
+                value="https://i.ibb.co/vjbhkP1/sunny2.png"
+              >
+                <img
+                  src="https://i.ibb.co/vjbhkP1/sunny2.png"
+                  alt="avatar-six"
+                />
+              </button>
+            </form>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--About Modal-->
+<div
+  class="modal fade"
+  id="aboutmeModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="aboutmeModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">
+          Tell Us About Yourself
+        </h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
         <form action="{{url_for('about_me')}}" method="POST">
-        <textarea name="description"  placeholder="About me..." maxlength="60"></textarea>
-        <button type="submit" class="btn btn-primary m-2">Save</button>
+          <textarea
+            name="description"
+            placeholder="About me..."
+            maxlength="60"
+          ></textarea>
+          <button type="submit" class="btn btn-primary m-2">Save</button>
         </form>
-        <button type="button" class="btn btn-secondary m-2" data-dismiss="modal">Close</button>
-       
+        <button
+          type="button"
+          class="btn btn-secondary m-2"
+          data-dismiss="modal"
+        >
+          Close
+        </button>
       </div>
-     
     </div>
   </div>
 </div>
-
 
 <div class="contain-entire-post">
-<!--Write a post-->
-<div class="container">
-  <div class="row">
-    <div class="col-12">
-      <form action="{{url_for('make_post')}}" method="POST">
-        <input
-          type="text"
-          name="main_content"
-          placeholder="Type your post here"
-        />
-        <button type="submit" class="btn btn-success">Post</button>
-      </form>
+  <!--Write a post-->
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <form action="{{url_for('make_post')}}" method="POST">
+          <input
+            type="text"
+            name="main_content"
+            placeholder="Type your post here"
+          />
+          <button type="submit" class="btn btn-success">Post</button>
+        </form>
+      </div>
     </div>
   </div>
-</div>
 
-
-<!--View Posts-->
-<!--Your Own latest Post-->
-<div class="container my-latest-post">
-<div class="row">
-<div class="col-4">
-<ul>
-        <li><i class="far fa-user pr-1"></i>{{my_own_post.posted_by}}</li>
-        <li><i class="far fa-calendar-alt pr-1"></i>{{my_own_post.date_posted}}</li>
-      </ul>
-</div>
-<div class="col-8">
-    {{my_own_post.main_content}}
-    </div>
-</div>
-</div>
-
-<!--Followers Posts-->
-<div class="contain-posts-section">
-{% for n in posts_to_display %}
-<div class="container contain-post">
-  <div class="row">
-    <div class="col-4">
-      <ul>
-        <li><i class="far fa-user pr-1"></i>{{n['posted_by']}}</li>
-        <li><i class="far fa-calendar-alt pr-1"></i>{{n['date_posted']}}</li>
-      </ul>
-    </div>
-    <div class="col-8">
-    {{n['main_content']}}
+  <!--View Posts-->
+  <!--Your Own latest Post-->
+  <div class="container my-latest-post">
+    <div class="row">
+      <div class="col-4">
+        <ul>
+          <li><i class="far fa-user pr-1"></i>{{my_own_post.posted_by}}</li>
+          <li>
+            <i class="far fa-calendar-alt pr-1"></i>{{my_own_post.date_posted}}
+          </li>
+        </ul>
+      </div>
+      <div class="col-8">
+        {{my_own_post.main_content}}
+      </div>
     </div>
   </div>
-</div>
-</div>
 
-{% endfor %}
+  <!--Followers Posts-->
+  <div class="contain-posts-section">
+    {% for n in posts_to_display %}
+    <div class="container contain-post">
+      <div class="row">
+        <div class="col-4 text-center">
+        <img src="{{n['post_avatar']}}" style="height: 50px; width: 50px;">
+          <ul>
+            <li><i class="far fa-user pr-1"></i>{{n['posted_by']}}</li>
+            <li>
+              <i class="far fa-calendar-alt pr-1"></i>{{n['date_posted']}}
+            </li>
+          </ul>
+        </div>
+        <div class="col-8">
+          {{n['main_content']}}
+        </div>
+      </div>
+    </div>
+     {% endfor %}
+  </div>
+
+ 
 </div>
 <!--NEED SOME LOGIN HERE TO GENERATE POSTS - GET POSTS IN PYTHON-->
 <div class="container post-container">
   <div class="row">
-    <div class="col-12">
-</div>
+    <div class="col-12"></div>
   </div>
 </div>
-
-
 
 {% endblock %}

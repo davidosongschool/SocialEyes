@@ -4,17 +4,30 @@
 
 <div class="container">
 <div class="row">
-<div class="col-12">
-<form action="{{url_for('start_following')}}" method="POST">
+<div class="col-12 text-center">
+<form action="{{url_for('search_results')}}" method="POST">
         <input
+        class="form-control mt-2"
           type="text"
-          name="follow_username"
-          placeholder="Enter the username here"
+          name="searched_user"
+          placeholder="Enter a username to search"
         />
-        <button type="submit" class="btn btn-success">Start Following</button>
+        <button type="submit" class="btn btn-success mt-2">Search</button>
       </form>
 </div>
 </div>
+{% for n in results %}
+
+<div class="card user-card">
+  <img src="{{n['avatar']}}" class="card-img-top" alt="user_avatar">
+  <div class="card-body">
+    <h5 class="card-title">{{n['username']}}</h5>
+    <p class="card-text">{{n['description']}}</p>
+    <a href="#" class="btn btn-primary">Follow</a>
+  </div>
 </div>
 
+
+
+{% endfor %}
 {% endblock %}

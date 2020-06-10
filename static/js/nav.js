@@ -1,6 +1,4 @@
 
-
-
 $(".open-menu-signup").click(function(){
 $(".contain-register").removeClass('d-none');
 $(".contain-login").addClass("d-none");

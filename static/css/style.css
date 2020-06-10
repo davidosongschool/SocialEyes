@@ -124,9 +124,20 @@ padding: 20px;
     height: 60px;
     width: 60px;
     padding: 10px;
-    border: 2px solid lightgrey;
     border-radius: 30px;
 }
+
+.choose-avatar-list li{
+        display: inline-block;
+}
+
+
+.choose-avatar-list img{
+        height: 130px;
+        width: 130px;
+        padding: 20px;
+}
+
 
 .edit-desc {
     margin-left: 5px;
@@ -151,6 +162,10 @@ padding: 20px;
 }
 
 /* 3. Posts -------------------- */
+.contain-posts-section {
+    margin-bottom: 100px;
+}
+
 
 .contain-entire-post {
     display: block;
@@ -196,6 +211,11 @@ background-color: aliceblue;
     margin-bottom: 200px;
 }
 
+.country-news li {
+    display: inline-block;
+}
+
+
 .news-card{
     margin: 10px;
 } 
@@ -207,7 +227,15 @@ background-color: aliceblue;
 }
 
 
-/* 5. Footer Menu ---------------- */
+/* 5. Find Users ---------- */
+
+.user-card {
+    width: 20%;
+    display: inline-block;
+}
+
+
+/* 6. Footer Menu ---------------- */
 
 .footer-menu {
     height: 8vh;

@@ -19,16 +19,24 @@ mongo = PyMongo(app)
 users = mongo.db.users
 username = ''
 
+# Not Found Page - Error Handler
 
-@app.route('/')
-@app.route('/landing')
+
+@app.errorhandler(404)
+def not_found(error):
+
+    return render_template("oops.html")
+
+
+@ app.route('/')
+@ app.route('/landing')
 def landing():
     if 'username' in session:
         return redirect(url_for('dashboard'))
     return render_template('landing.html')
 
 
-@app.route('/dashboard')
+@ app.route('/dashboard')
 def dashboard():
     if 'username' in session:
         user = users.find_one({'username': session['username']})
@@ -107,7 +115,7 @@ def register_user():
                           'following': [""],
                           'followers': [""],
                           'discover': True,
-                          'avatar': 'Choose a picture'})
+                          'avatar': 'https://i.ibb.co/syp2Jpw/default-avatar.png'})
 
         session['username'] = request.form['username']
         return redirect(url_for('dashboard'))
@@ -118,11 +126,17 @@ def register_user():
 def make_post():
     posts = mongo.db.posts
     date = str(datetime.date.today())
+    # To get user info (their avatar)
+    users = mongo.db.users
+    user = users.find_one({'username': session['username']})
+    post_avatar = user['avatar']
+
     posts.insert_one({'main_content': request.form['main_content'],
                       'posted_by': session['username'],
                       'date_posted': date,
                       'liked_by': (''),
-                      'content_link': ''})
+                      'content_link': '',
+                      'post_avatar': post_avatar})
     return redirect(url_for('dashboard'))
 
 
@@ -131,13 +145,23 @@ def find():
     return render_template("follow.html")
 
 
-@ app.route('/start_following', methods=['POST'])
+@ app.route('/search_results', methods=['POST'])
+def search_results():
+    searched = request.form['searched_user']
+
+    users.mongo.db.users
+    results = users.find({'username': { '$regex' : searched, '$options' : 'i' }})
+
+    return render_template('follow.html', results=results)
+
+
+""" @ app.route('/start_following', methods=['POST'])
 def start_following():
     users = mongo.db.users
     users.update({'username': session['username']}, {
                  "$push": {'following': request.form['follow_username']}})
 
-    return redirect(url_for('dashboard'))
+    return redirect(url_for('dashboard')) """
 
 
 @ app.route('/settings')
@@ -155,6 +179,7 @@ def about_me():
 
 @ app.route('/get_news')
 def get_news():
+    # Make environment variable for API KEY ?
     url = ('http://newsapi.org/v2/top-headlines?'
            'country=ie&'
            'apiKey=a486387335cd46e0a3c0cb8614fdc4ef')
@@ -162,6 +187,51 @@ def get_news():
     response = requests.get(url)
 
     return render_template('news.html', response=response.json())
+
+
+@ app.route('/change_news', methods=['POST'])
+def change_news():
+    country = request.form['country']
+
+    url = ('http://newsapi.org/v2/top-headlines?'
+           'country=' + country + '&'
+           'apiKey=a486387335cd46e0a3c0cb8614fdc4ef')
+
+    response = requests.get(url)
+
+    return render_template('news.html', response=response.json())
+
+
+@ app.route('/change_avatar', methods=['POST'])
+def change_avatar():
+
+    img_url = request.form['avatar-change']
+    users = mongo.db.users
+    users.update({'username': session['username']}, {"$set": {
+                 'avatar': img_url}})
+    return redirect(url_for('dashboard'))
+
+
+@ app.route('/users/<username>')
+def display_profile(username):
+    if 'username' not in session:
+        return redirect(url_for('landing'))
+    users = mongo.db.users
+    user = users.find_one({'username': username})
+
+    profile_username = username.lower()
+    existing_user = users.find_one({'username': profile_username})
+
+    if existing_user is None:
+        return render_template('oops.html')
+    posts = mongo.db.posts
+    # Display your own latest post
+    find_posts = posts.find({'posted_by': username}, sort=[
+        ('_id', -1)])
+
+    user_posts = find_posts
+
+    return render_template('profile.html', user_posts=user_posts, username=username, user=user)
 
 
 if __name__ == '__main__':

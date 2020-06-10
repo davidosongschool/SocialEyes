@@ -1,0 +1,47 @@
+{% extends 'nav.html' %}
+
+{% block content %}
+<div class="container-fluid contain-user-info">
+  <div class="row mt-2">
+    <div class="col-4">
+      <img
+        src="{{ user.avatar }}"
+        class="avatar"
+        data-toggle="modal"
+        data-target="#changeavatarModal"
+      />
+    </div>
+    <div class="col-8">
+      <ul>
+        <li><span class="username">{{user.username}}</span></li>
+        <li>
+          <span class="description">{{user.description}}</span
+          >
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+  <div class="contain-posts-section mt-5 pt-5">
+    {% for n in user_posts %}
+    <div class="container contain-post">
+      <div class="row">
+        <div class="col-4 text-center">
+        <img src="{{n['post_avatar']}}" style="height: 50px; width: 50px;">
+          <ul>
+            <li><i class="far fa-user pr-1"></i>{{n['posted_by']}}</li>
+            <li>
+              <i class="far fa-calendar-alt pr-1"></i>{{n['date_posted']}}
+            </li>
+          </ul>
+        </div>
+        <div class="col-8">
+          {{n['main_content']}}
+        </div>
+      </div>
+    </div>
+     {% endfor %}
+  </div>
+
+{% endblock %}
