@@ -228,7 +228,8 @@
     <div class="container contain-post">
       <div class="row">
         <div class="col-4 text-center">
-        <img src="{{n['post_avatar']}}" style="height: 50px; width: 50px;">
+     
+        <a href="/users/{{n['posted_by']}}" alt="Go to user page"><img src="{{n['post_avatar']}}" style="height: 50px; width: 50px;"></a>
           <ul>
             <li><i class="far fa-user pr-1"></i>{{n['posted_by']}}</li>
             <li>
