@@ -169,7 +169,7 @@ def search_results():
     following = []
     if user['following']:
         following = user['following']
-    length = len(following)    
+    length = len(following)
     results = users.find({'username': {'$regex': searched, '$options': 'i'}})
     # Check that they don't already follow them
     # check if user['following'] contains specific_result.username
@@ -215,10 +215,12 @@ def get_news():
     url = ('http://newsapi.org/v2/top-headlines?'
            'country=ie&'
            'apiKey=a486387335cd46e0a3c0cb8614fdc4ef')
+    
+    class1 = "ie"
 
     response = requests.get(url)
 
-    return render_template('news.html', response=response.json())
+    return render_template('news.html', response=response.json(), class1=class1)
 
 
 @ app.route('/change_news', methods=['POST'])
@@ -230,8 +232,24 @@ def change_news():
            'apiKey=a486387335cd46e0a3c0cb8614fdc4ef')
 
     response = requests.get(url)
+    class1 = ""
+    class2 = ""
+    class3 = ""
 
-    return render_template('news.html', response=response.json())
+    if country == 'ie':
+        class1 = "selected"
+        class2 = "not-selected"
+        class3 = "not-selected"
+    elif country == "us":
+        class1 = "not-selected"
+        class2 = "selected"
+        class3 = "not-selected"
+    else:
+        class1 = "not-selected"
+        class2 = "not-selected"
+        class3 = "selected"
+
+    return render_template('news.html', response=response.json(), class1=class1, class2=class2, class3=class3)
 
 
 @ app.route('/change_avatar', methods=['POST'])
