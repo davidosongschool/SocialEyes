@@ -150,7 +150,12 @@ def make_post():
 
 @ app.route('/find')
 def find():
-    return render_template("follow.html")
+    users = mongo.db.users
+    user = users.find_one({'username': session['username']})
+    following = []
+    if user['following']:
+        following = user['following']
+    return render_template("follow.html", following=following)
 
 
 @ app.route('/search_results', methods=['POST'])
@@ -174,6 +179,14 @@ def start_following():
                  "$push": {'following': request.form['follow_username']}})
 
     return redirect(url_for('dashboard'))
+
+
+@ app.route('/unfollow', methods=['POST'])
+def unfollow():
+    users = mongo.db.users
+    users.update({'username': session['username']}, {
+                 "$pull": {'following': request.form['unfollow_username']}})
+    return redirect(url_for('find'))
 
 
 @ app.route('/settings')

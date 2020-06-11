@@ -301,19 +301,39 @@ background-color: aliceblue;
 
 /* 5. Find Users ---------- */
 
-.user-card {
-    width: 60%;
-    display: inline-block;
-    font-size: 14px;
+.following-header {
+    text-align: center;
 }
+
+.following-list {
+    padding-top: 10vh !important;
+
+}
+
 
 .contain-results {
     margin-top: 50px;
     margin-bottom: 300px;
-
-
 }
 
+.results-row {
+    border-top: 1px solid lightgray;
+    padding: 10px;
+}
+.search-avatar {
+  height: 50px;
+  width: 50px;  
+}
+
+.following-button {
+    background-color: #485696 !important;
+    color: white !important;
+    border: none !important;
+}
+.display-username {
+    font-size: 16px;
+    font-weight: 500;
+}
 
 /* 6. Footer Menu ---------------- */
 

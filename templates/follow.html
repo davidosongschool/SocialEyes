@@ -2,51 +2,91 @@
 
 <div class="container contain-under">
   <div class="row">
-    <div class="col-12 text-center">
-      <form action="{{url_for('search_results')}}" method="POST">
-        <input
-          class="form-control mt-2"
-          type="text"
-          name="searched_user"
-          placeholder="Enter a username to search"
-          required
-        />
-        <button type="submit" class="btn btn-success mt-2">Search</button>
-      </form>
+    <!--Following Section-->
+    <div class="col-6 following-list">
+      <h2 class="following-header">Following</h2>
+      <hr />
+      {% for n in following %}
+      <div class="row m-4">
+        <div class="col-6 text-center"><h4 class="display-username"><i class="far fa-user pr-1"></i>{{n}}</h4></div>
+        <div class="col-6 text-center">
+          <form action="{{url_for('unfollow')}}" method="POST">
+            <button
+              type="submit"
+              name="unfollow_username"
+              value="{{n}}"
+              class="btn btn-primary following-button ml-4"
+            >
+              Unfollow
+            </button>
+          </form>
+        </div>
+      </div>
+      {% endfor %}
     </div>
-  </div>
-  <div class="contain-results text-center">
+    <!--Find people section-->
+    <div class="col-6">
+      <div class="row">
+        <div class="col-12 text-center">
+          <form action="{{url_for('search_results')}}" method="POST">
+            <input
+              class="form-control mt-2"
+              type="text"
+              name="searched_user"
+              placeholder="Enter a username to search"
+              required
+            />
+            <button type="submit" class="btn btn-success mt-2">Search</button>
+          </form>
+        </div>
+      </div>
 
-    {% for n in results %} 
-     {% set render = namespace(total=0) %}
-    <!--Dont show the login in user in the search results-->
-    {% if n['username'] != my_username %} 
-    <div class="card user-card mt-2">
-      <img src="{{n['avatar']}}" class="card-img-top" alt="user_avatar" />
-      <div class="card-body">
-        <h5 class="card-title">{{n['username']}}</h5>
-        <p class="card-text">{{n['description']}}</p>
-        <!--Each time you go to render a button, check if the user is in the following list
-            If they are - then display a 'follow button'
-        -->
-        
-        {% for x in user['following']%}
-            {% if x == n['username']%}
+      <div class="contain-results text-center">
+        {% for n in results %} {% set render = namespace(total=0) %}
+        <!--Dont show the login in user in the search results-->
+        {% if n['username'] != my_username %}
+        <div class="row results-row">
+          <div class="col-6">
+            <img
+              src="{{n['avatar']}}"
+              class="card-img-top search-avatar img-fluid"
+              alt="user_avatar"
+            />
+            <h5>{{n['username']}}</h5>
+            <p>{{n['description']}}</p>
+          </div>
+          <div class="col-6">
+            {% for x in user['following']%} {% if x == n['username']%}
             <!--Maybe render unfollow ??-->
-            <a class="btn btn-primary">Following</a>  
-            {% set render.total = 1 %} 
+            <form action="{{url_for('unfollow')}}" method="POST">
+              <button
+                type="submit"
+                name="unfollow_username"
+                value="{{n['username']}}"
+                class="btn btn-primary following-button"
+              >
+                Unfollow
+              </button>
+            </form>
+            {% set render.total = 1 %} {% endif %} {% endfor %} {% if
+            render.total != 1 %}
+            <!--Some logic here to exlude followers from this-->
+            <form action="{{url_for('start_following')}}" method="POST">
+              <button
+                type="submit"
+                name="follow_username"
+                value="{{n['username']}}"
+                class="btn btn-primary"
+              >
+                Follow
+              </button>
+            </form>
             {% endif %}
-        {% endfor %}
-        {% if render.total != 1 %}
-        <!--Some logic here to exlude followers from this-->
-        <form action="{{url_for('start_following')}}" method="POST"><button type="submit" name="follow_username" value="{{n['username']}}" class="btn btn-primary">Follow</button></form> 
-        {% endif %}
-
+          </div>
+        </div>
+        {% endif %} {% endfor %}
       </div>
     </div>
-    
-    {% endif %} 
-    {% endfor %}
   </div>
   {% endblock %}
 </div>
