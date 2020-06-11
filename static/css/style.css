@@ -21,6 +21,8 @@ Key:
 
 @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@100;300;500;600&display=swap');
 
+
+
 a {
     text-decoration: none !important;
     color: inherit !important;
@@ -87,6 +89,10 @@ body {
     margin-top: 35px;
 }
 
+button {
+    background-color: transparent;
+}
+
 
 
 /* Landing Page ------------ */ 
@@ -127,7 +133,7 @@ padding: 20px;
 }
 
 .form-control {
-    width: 70% !important;
+    width: 80% !important;
     display: block;
     text-align: center;
     margin: 0 auto;
@@ -301,24 +307,53 @@ background-color: aliceblue;
 
 /* 5. Find Users ---------- */
 
-.following-header {
-    text-align: center;
+.find-menu-list li{
+display: inline-block;
+padding: 10px;
+font-size: 24px;
+font-weight: 500;
+
+}
+.no-followers-icon {
+    font-size: 20vw;
+    margin-top: 25vh;
+    color: #45B5AC;
 }
 
-.following-list {
-    padding-top: 10vh !important;
-
+.big-find-users {
+    height: 50px;
+    width: 40vw;
+    background-color: #485696;
+    color: white;
+    margin-top: 50vh;
 }
 
+.big-find-users:hover {
+ background-color: #45B5AC;
+}
+
+
+.search-button {
+    font-size: 20px;
+}
+
+.submit-search {
+    border: none !important;
+    background-color: none !important;
+}
 
 .contain-results {
     margin-top: 50px;
     margin-bottom: 300px;
+    overflow: hidden;
 }
 
 .results-row {
     border-top: 1px solid lightgray;
-    padding: 10px;
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
 .search-avatar {
   height: 50px;
@@ -354,11 +389,6 @@ background-color: aliceblue;
     width: 25px !important;
     height: 30px;
 }
-
-
-
-
-
 
 
 /* ----------- Media Queries ----- */

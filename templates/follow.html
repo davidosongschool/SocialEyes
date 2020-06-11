@@ -2,56 +2,41 @@
 
 <div class="container contain-under">
   <div class="row">
-    <!--Following Section-->
-    <div class="col-6 following-list">
-      <h2 class="following-header">Following</h2>
-      <hr />
-      {% for n in following %}
-      <div class="row m-4">
-        <div class="col-6 text-center"><h4 class="display-username"><i class="far fa-user pr-1"></i>{{n}}</h4></div>
-        <div class="col-6 text-center">
-          <form action="{{url_for('unfollow')}}" method="POST">
-            <button
-              type="submit"
-              name="unfollow_username"
-              value="{{n}}"
-              class="btn btn-primary following-button ml-4"
-            >
-              Unfollow
+    <div class="col-12 find-menu text-center">
+      <ul class="find-menu-list">
+        <li class="find-users-menu-button underline">Find Users</li>
+        <li class="show-following-menu-button not-selected">Following</li>
+      </ul>
+    </div>
+    <div class="contain-find-users mx-auto">
+      <!--Find Users Section-->
+      <div class="row mx-auto">
+        <div class="col-12 text-center">
+          <form action="{{url_for('search_results')}}" method="POST">
+            <input
+              class="form-control mt-2 d-inline-block"
+              type="text"
+              name="searched_user"
+              placeholder="Search Username"
+              required
+            />
+            <button type="submit" class="submit-search">
+              <i class="fas fa-search d-inline-block search-button"></i>
             </button>
           </form>
         </div>
       </div>
-      {% endfor %}
-    </div>
-    <!--Find people section-->
-    <div class="col-6">
-      <div class="row">
-        <div class="col-12 text-center">
-          <form action="{{url_for('search_results')}}" method="POST">
-            <input
-              class="form-control mt-2"
-              type="text"
-              name="searched_user"
-              placeholder="Enter a username to search"
-              required
-            />
-            <button type="submit" class="btn btn-success mt-2">Search</button>
-          </form>
-        </div>
-      </div>
-
-      <div class="contain-results text-center">
+      <div class="contain-results text-center mx-auto">
         {% for n in results %} {% set render = namespace(total=0) %}
         <!--Dont show the login in user in the search results-->
         {% if n['username'] != my_username %}
         <div class="row results-row">
           <div class="col-6">
-            <img
+            <a href="/users/{{n['username']}}"><img
               src="{{n['avatar']}}"
               class="card-img-top search-avatar img-fluid"
               alt="user_avatar"
-            />
+            /></a>
             <h5>{{n['username']}}</h5>
             <p>{{n['description']}}</p>
           </div>
@@ -88,5 +73,36 @@
       </div>
     </div>
   </div>
-  {% endblock %}
+  <div class="contain-following-users mx-auto d-none">
+    <!--Following Section-->
+    <div class="col-12 following-list">
+    {% if length == 0 %}
+    <i class="fas fa-sad-tear no-followers-icon complete-center img-fluid"></i>
+    <button class="big-find-users complete-center ">Find People</button>
+    {% else %}
+      {% for n in following %}
+      <div class="row m-4">
+        <div class="col-6 text-center">
+          <h4 class="display-username">
+            <i class="far fa-user pr-1"></i>{{n}}
+          </h4>
+        </div>
+        <div class="col-6 text-center">
+          <form action="{{url_for('unfollow')}}" method="POST">
+            <button
+              type="submit"
+              name="unfollow_username"
+              value="{{n}}"
+              class="btn btn-primary following-button ml-4"
+            >
+              Unfollow
+            </button>
+          </form>
+        </div>
+      </div>
+      {% endfor %}
+      {% endif %}
+    </div>
+  </div>
 </div>
+{% endblock %}

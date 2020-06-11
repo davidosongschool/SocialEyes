@@ -155,7 +155,8 @@ def find():
     following = []
     if user['following']:
         following = user['following']
-    return render_template("follow.html", following=following)
+    length = len(following)
+    return render_template("follow.html", following=following, length=length)
 
 
 @ app.route('/search_results', methods=['POST'])
@@ -165,11 +166,14 @@ def search_results():
     my_username = session['username']
     users.mongo.db.users
     user = users.find_one({'username': my_username})
-
+    following = []
+    if user['following']:
+        following = user['following']
+    length = len(following)    
     results = users.find({'username': {'$regex': searched, '$options': 'i'}})
     # Check that they don't already follow them
     # check if user['following'] contains specific_result.username
-    return render_template('follow.html', results=results, my_username=my_username, user=user)
+    return render_template('follow.html', results=results, my_username=my_username, user=user, following=following, length=length)
 
 
 @ app.route('/start_following', methods=['POST'])
@@ -178,7 +182,7 @@ def start_following():
     users.update({'username': session['username']}, {
                  "$push": {'following': request.form['follow_username']}})
 
-    return redirect(url_for('dashboard'))
+    return redirect(url_for('find'))
 
 
 @ app.route('/unfollow', methods=['POST'])
@@ -186,6 +190,9 @@ def unfollow():
     users = mongo.db.users
     users.update({'username': session['username']}, {
                  "$pull": {'following': request.form['unfollow_username']}})
+
+    bs3 = "d-none"
+    bs4 = "d-block"
     return redirect(url_for('find'))
 
 
