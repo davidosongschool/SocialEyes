@@ -1,7 +1,7 @@
 {% extends 'nav.html' %}
 
 {% block content %}
-<div class="container text-center news-container">
+<div class="container text-center news-container contain-under">
 <h5 class="mt-3">Latest News</h5>
 <ul class="country-news">
 <li><form action="{{url_for('change_news')}}" method="POST"><button class="btn btn-warning" type="submit" name="country" value="ie">Ireland</button></form></li>

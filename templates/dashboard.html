@@ -1,19 +1,20 @@
 {% extends 'nav.html' %} {% block content %}
 
 <!--User About Section -->
-<div class="container-fluid contain-user-info">
-  <div class="row mt-2">
+<div class="container contain-user-info">
+
+  <div class="row">
     <div class="col-4">
       <img
         src="{{ user.avatar }}"
-        class="avatar"
+        class="avatar complete-center"
         data-toggle="modal"
         data-target="#changeavatarModal"
       />
     </div>
     <div class="col-8">
-      <ul>
-        <li><span class="username">{{user.username}}</span></li>
+      <ul class="pt-2">
+        <li><i class="far fa-user pr-1"></i><span class="username">{{user.username}}</span></li>
         <li>
           <span class="description">{{user.description}}</span
           ><i
@@ -171,7 +172,7 @@
           <textarea
             name="description"
             placeholder="About me..."
-            maxlength="60"
+            maxlength="40"
           ></textarea>
           <button type="submit" class="btn btn-primary m-2">Save</button>
         </form>

@@ -13,12 +13,13 @@ Key:
 3.2 View Posts
 4. News
 5. Footer Menu
+6. Media Queries
 
 ------------------------------------ */
 
 /* 1. Presets  ------------- */
 
-@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@100;300;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@100;300;500;600&display=swap');
 
 a {
     text-decoration: none !important;
@@ -61,26 +62,56 @@ ul li {
     transform: translate(-50%, -50%);
 }
 
+.vertical-center {
+    margin: 0;
+    position: absolute;
+    top: 55%;
+    left: 5px;
+    -ms-transform: translate(0%, -50%);
+    transform: translate(0%, -50%);
+
+}
+
 body {
     font-family: 'Raleway', sans-serif !important;
     font-weight: 300 !important;
 }
 
+.open-menu-signup,
+.open-menu-login
+{
+    cursor: pointer;
+}
+
+.contain-under {
+    margin-top: 35px;
+}
+
+
 
 /* Landing Page ------------ */ 
 .page-container {
     max-height: 100vh;
-    overflow: hidden;
+    width: 100%;
+    overflow-x: hidden;
 }
 
-.contain-logo {
-    max-height: 50vh;
-    min-height: 50vh;
-}
 .landing-logo {
-    width: 250px;
-    height: 250px;
+    width: 300px;
+    height: 300px;
     padding: 20px;
+}
+
+.landing-title {
+    color: white;
+    font-size: 4vw;
+}
+
+.join-text {
+    margin-top: -10vh !important;
+    padding-bottom: 5vh;
+    font-size: 3vw;
+    font-weight: 500;
 }
 
 
@@ -105,9 +136,10 @@ padding: 20px;
 .register-button {
     display: block;
     margin: 0 auto;
-    margin-top: 5px;
+    margin-top: 20px;
     background-color: #45B5AC !important;
     color: white !important;
+    
 }
 
 .already-have-account {
@@ -121,9 +153,42 @@ padding: 20px;
     color: red;
 }
 
+/* Need to decide what to do with this */
+.learn-more {
+height: 30px;
+width: 100px;
+background-color: #485696;
+color: white;
+position: absolute;
+top: 10px;
+right: 10px;
+line-height: 30px;
+box-shadow: 5px 5px 5px;
+cursor: pointer;
+}
+
+.learn-more:hover{
+    background-color: #45B5AC;
+}
+
 /* 2. Dashboard ---------------- */ 
 
 /* 2.1 User Section */ 
+
+.logo-bar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 35px;
+    background-color: #485696;
+    z-index: 100;
+}
+
+.small-logo {
+    height: 15px;
+    width: 10px;
+
+}
 
 .avatar {
     height: 60px;
@@ -150,8 +215,10 @@ padding: 20px;
 
 .contain-user-info {
     position: fixed;
-    top: 0;
-    max-height: 100px;
+    top: 35px;
+    left: 50%;
+    transform: translate(-50%, 0);
+    min-height: 60px;
     z-index: 100;
     background-color: white;
     border-bottom: 2px solid lightgray;
@@ -174,7 +241,7 @@ padding: 20px;
 
 .contain-entire-post {
     display: block;
-    margin-top: 100px;
+    margin-top: 150px;
     -ms-overflow-style: none;
     overflow-y: hidden !important;
     z-index: 1;
@@ -252,7 +319,7 @@ background-color: aliceblue;
 
 .footer-menu {
     height: 8vh;
-   background-color: #45B5AC !important;
+   background-color:#485696 !important;
     position: fixed;
     bottom: 0;
     left: 0;
@@ -264,6 +331,43 @@ background-color: aliceblue;
 }
 
 .small-logo {
-    width: 30px;
+    width: 25px !important;
     height: 30px;
+}
+
+
+
+
+
+
+
+/* ----------- Media Queries ----- */
+
+@media (min-width: 768px) {
+
+
+.landing-logo {
+    width: 400px;
+    height: 400px;
+    padding: 20px;
+    margin-top: 10vh !important;
+}
+
+.contain-form {
+   margin-top: 26vh !important;
+   padding-top: 5vh !important;
+}
+
+
+
+.logo-contain{
+    min-height: 100vh;
+    background-color: #485696;
+    
+}
+
+
+
+
+
 }

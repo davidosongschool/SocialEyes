@@ -98,6 +98,8 @@ def logout():
 
 @ app.route('/register_user', methods=['POST', 'GET'])
 def register_user():
+    """ This function registers a user 
+    """
     if 'username' in session:
         return redirect(url_for('dashboard'))
     users = mongo.db.users
@@ -105,10 +107,9 @@ def register_user():
     entered_email = request.form['email'].lower()
     existing_user = users.find_one({'username': entered_username})
     existing_email = users.find_one({'email': entered_email})
-    # Check if the username or email already existsÏ
 
+    # Check if the username or email already exists
     if existing_user is None and existing_email is None:
-
         encrypted = bcrypt.hashpw(
             request.form['password'].encode('utf-8'), bcrypt.gensalt())
         date = str(datetime.date.today())
@@ -124,6 +125,7 @@ def register_user():
 
         session['username'] = request.form['username']
         return redirect(url_for('dashboard'))
+
     error = "Username or Email already exists!"
     return render_template('landing.html', error=error)
 
@@ -153,7 +155,6 @@ def find():
 
 @ app.route('/search_results', methods=['POST'])
 def search_results():
-    rendered = 'false'
     searched = request.form['searched_user']
     # Don't show yourself in search results
     my_username = session['username']
