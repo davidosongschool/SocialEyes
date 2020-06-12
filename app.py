@@ -143,7 +143,7 @@ def make_post():
                       'posted_by': session['username'],
                       'date_posted': date,
                       'liked_by': (''),
-                      'content_link': '',
+                      'content_link': request.form['content_link'],
                       'post_avatar': post_avatar})
     return redirect(url_for('dashboard'))
 

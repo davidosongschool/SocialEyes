@@ -192,18 +192,72 @@
   <!--Write a post-->
   <div class="container">
     <div class="row">
-      <div class="col-12">
+      <div class="col-12 text-center">
+      <button data-toggle="modal"
+        data-target="#postModal" class="btn write-post-btn text-center">Post</button>
+      </div>
+    </div>
+  </div>
+
+  <!--Post Modal-->
+
+<div
+  class="modal fade"
+  id="postModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="postModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button
+          type="button"
+          class="close close-icon"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-auto">
+      <div class="reminder">
+      <i class="fas fa-exclamation-triangle alert-icon mr-1"></i><strong>Reminder: Posts on SocialEyes are all about discussing content. Every post must
+      include a link to the material you are speaking about.</strong>
+      </div>
+      
         <form action="{{url_for('make_post')}}" method="POST">
-          <input
-            type="text"
+        <div class="row">
+        <div class="contain-icon">
+        <i class="fas fa-link input-icon"></i>
+        </div>
+        <input type="url" name="content_link" class="input-link" placeholder="http://" required/>
+        </div>
+         <div class="row">
+        <div class="contain-icon">
+          <i class="fas fa-pen-alt input-icon"></i>
+        </div>
+      
+        <textarea
+            class="post-textarea"
             name="main_content"
-            placeholder="Type your post here"
-          />
-          <button type="submit" class="btn btn-success">Post</button>
+            placeholder="Write post..."
+            maxlength="250"
+            required
+          ></textarea>
+          </div>
+          <br/>
+          <div class="row">
+          <div class="contain-icon">
+          </div>
+          <button type="submit" class="post-btn">Post</button>
+          </div>
         </form>
       </div>
     </div>
   </div>
+</div>
 
   <!--View Posts-->
   <!--Your Own latest Post-->
