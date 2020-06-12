@@ -38,6 +38,7 @@ def landing():
 
 @ app.route('/dashboard')
 def dashboard():
+
     if 'username' in session:
         user = users.find_one({'username': session['username']})
         posts = mongo.db.posts
@@ -62,7 +63,6 @@ def dashboard():
             # Don't add any blank posts
             if latest_post is not None:
                 posts_to_display.extend([latest_post])
-         
 
         return render_template('dashboard.html', user=user, my_own_post=my_own_post, posts_to_display=posts_to_display)
     return render_template('landing.html')
@@ -140,7 +140,7 @@ def make_post():
     user = users.find_one({'username': session['username']})
     post_avatar = user['avatar']
 
-    #Create a shortened version of the url
+    # Create a shortened version of the url
     short_url = shorten(request.form['content_link'])
 
     posts.insert_one({'main_content': request.form['main_content'],
@@ -155,6 +155,9 @@ def make_post():
 
 @ app.route('/find')
 def find():
+    if 'username' not in session:
+        return redirect(url_for('landing'))
+
     users = mongo.db.users
     user = users.find_one({'username': session['username']})
     following = []
@@ -166,6 +169,10 @@ def find():
 
 @ app.route('/search_results', methods=['POST'])
 def search_results():
+
+    if 'username' not in session:
+        return redirect(url_for('landing'))
+
     searched = request.form['searched_user']
     # Don't show yourself in search results
     my_username = session['username']
@@ -183,6 +190,10 @@ def search_results():
 
 @ app.route('/start_following', methods=['POST'])
 def start_following():
+
+    if 'username' not in session:
+        return redirect(url_for('landing'))
+
     users = mongo.db.users
     users.update({'username': session['username']}, {
                  "$push": {'following': request.form['follow_username']}})
@@ -192,6 +203,10 @@ def start_following():
 
 @ app.route('/unfollow', methods=['POST'])
 def unfollow():
+
+    if 'username' not in session:
+        return redirect(url_for('landing'))
+
     users = mongo.db.users
     users.update({'username': session['username']}, {
                  "$pull": {'following': request.form['unfollow_username']}})
@@ -203,11 +218,15 @@ def unfollow():
 
 @ app.route('/settings')
 def settings():
+    if 'username' not in session:
+        return redirect(url_for('landing'))
     return render_template('settings.html')
 
 
 @ app.route('/about_me', methods=['POST'])
 def about_me():
+    if 'username' not in session:
+        return redirect(url_for('landing'))
     users = mongo.db.users
     users.update({'username': session['username']}, {"$set": {
                  'description': request.form['description']}})
@@ -216,11 +235,13 @@ def about_me():
 
 @ app.route('/get_news')
 def get_news():
+    if 'username' not in session:
+        return redirect(url_for('landing'))
     # Make environment variable for API KEY ?
     url = ('http://newsapi.org/v2/top-headlines?'
            'country=ie&'
            'apiKey=a486387335cd46e0a3c0cb8614fdc4ef')
-    
+
     class1 = "ie"
 
     response = requests.get(url)
@@ -230,6 +251,9 @@ def get_news():
 
 @ app.route('/change_news', methods=['POST'])
 def change_news():
+
+    if 'username' not in session:
+        return redirect(url_for('landing'))
     country = request.form['country']
 
     url = ('http://newsapi.org/v2/top-headlines?'
@@ -259,6 +283,8 @@ def change_news():
 
 @ app.route('/change_avatar', methods=['POST'])
 def change_avatar():
+    if 'username' not in session:
+        return redirect(url_for('landing'))
 
     img_url = request.form['avatar-change']
     users = mongo.db.users
@@ -289,18 +315,13 @@ def display_profile(username):
     return render_template('profile.html', user_posts=user_posts, username=username, user=user)
 
 
-
-
 def shorten(shorten_url):
     """ This function takes in a url and shortens it to 25 characters + "..." tp
     make it for suitable for sharing 
-    """    
+    """
     new_url = list(shorten_url)
     new_url = ''.join(shorten_url[:25]) + "..."
     return new_url
-
-
-
 
 
 if __name__ == '__main__':

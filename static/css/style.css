@@ -285,6 +285,7 @@ cursor: pointer;
 
 .close-icon {
       color: white !important;
+      line-height: 15jpx;
 }
 
 .contain-icon {
