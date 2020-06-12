@@ -190,11 +190,13 @@
 
 <div class="contain-entire-post">
   <!--Write a post-->
-  <div class="container">
+  <div class="container contain-write-a-post-invivte">
     <div class="row">
       <div class="col-12 text-center">
-      <button data-toggle="modal"
-        data-target="#postModal" class="btn write-post-btn text-center">Post</button>
+      <div class="click-to-open-post pl-1 text-left" data-toggle="modal" data-target="#postModal">Post Something..</div>
+        <div class="contain-write-logo">
+          <i class="fas fa-pen-alt complete-center" data-toggle="modal" data-target="#postModal"></i>
+          </div>
       </div>
     </div>
   </div>
@@ -261,7 +263,7 @@
 
   <!--View Posts-->
   <!--Your Own latest Post-->
-  <div class="container my-latest-post">
+  <div class="container my-latest-post d-none">
     <div class="row">
       <div class="col-4">
         <ul>
@@ -271,20 +273,24 @@
           </li>
         </ul>
       </div>
-      <div class="col-8">
+      <div class="col-8 contain-post-content">
         {{my_own_post.main_content}}
       </div>
     </div>
+    <div class="row">
+     <div class="col-12 contain-link">
+      <a href="{{my_own_post.content_link}}">{{my_own_post.short_url}}</a>
+    </div>
   </div>
-
+</div>
   <!--Followers Posts-->
   <div class="contain-posts-section">
     {% for n in posts_to_display %}
     <div class="container contain-post">
       <div class="row">
-        <div class="col-4 text-center">
-     
-        <a href="/users/{{n['posted_by']}}" alt="Go to user page"><img src="{{n['post_avatar']}}" style="height: 50px; width: 50px;"></a>
+        <div class="col-3 text-center">
+        <div class="mt-3">
+        <a href="/users/{{n['posted_by']}}" alt="Go to user page" class="mt-2"><img src="{{n['post_avatar']}}" style="height: 30px; width: 30px;"></a>
           <ul>
             <li><i class="far fa-user pr-1"></i>{{n['posted_by']}}</li>
             <li>
@@ -292,8 +298,14 @@
             </li>
           </ul>
         </div>
-        <div class="col-8">
+        </div>
+        <div class="col-7 main-content-container">
           {{n['main_content']}}
+        </div>
+        <div class="col-2">
+         <div class="contain-link text-right">
+         <a href="{{n['content_link']}}" target="_blank"><div class="go-to-link shadow-sm mt-2"> <i class="fas fa-link complete-center"></i></div></a>
+         </div>
         </div>
       </div>
     </div>

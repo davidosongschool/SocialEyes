@@ -62,6 +62,7 @@ def dashboard():
             # Don't add any blank posts
             if latest_post is not None:
                 posts_to_display.extend([latest_post])
+         
 
         return render_template('dashboard.html', user=user, my_own_post=my_own_post, posts_to_display=posts_to_display)
     return render_template('landing.html')
@@ -98,7 +99,7 @@ def logout():
 
 @ app.route('/register_user', methods=['POST', 'GET'])
 def register_user():
-    """ This function registers a user 
+    """ This function registers a user
     """
     if 'username' in session:
         return redirect(url_for('dashboard'))
@@ -139,11 +140,15 @@ def make_post():
     user = users.find_one({'username': session['username']})
     post_avatar = user['avatar']
 
+    #Create a shortened version of the url
+    short_url = shorten(request.form['content_link'])
+
     posts.insert_one({'main_content': request.form['main_content'],
                       'posted_by': session['username'],
                       'date_posted': date,
                       'liked_by': (''),
                       'content_link': request.form['content_link'],
+                      'short_url': short_url,
                       'post_avatar': post_avatar})
     return redirect(url_for('dashboard'))
 
@@ -282,6 +287,20 @@ def display_profile(username):
     user_posts = find_posts
 
     return render_template('profile.html', user_posts=user_posts, username=username, user=user)
+
+
+
+
+def shorten(shorten_url):
+    """ This function takes in a url and shortens it to 25 characters + "..." tp
+    make it for suitable for sharing 
+    """    
+    new_url = list(shorten_url)
+    new_url = ''.join(shorten_url[:25]) + "..."
+    return new_url
+
+
+
 
 
 if __name__ == '__main__':

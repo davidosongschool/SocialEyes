@@ -247,7 +247,9 @@ cursor: pointer;
 
 /* 3. Posts -------------------- */
 .contain-posts-section {
+    margin-top: 20px;
     margin-bottom: 100px;
+    border-top: solid 1px lightgrey;
 }
 
 .reminder {
@@ -339,6 +341,18 @@ margin-left: 15px;
     z-index: 1;
 }
 
+.contain-link {
+    margin-left: 6px;
+}
+
+.main-content-container {
+    overflow-wrap:break-word;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+
+
 /* Hide scrollbar for Chrome, Safari and Opera */
 body::-webkit-scrollbar {
   display: none;
@@ -349,12 +363,36 @@ body::-webkit-scrollbar {
 
 /* 3.1 Write post */ 
 
-.click-to-write {
+.click-to-open-post {
+position: relative;
+height: 30px;
+width: 80%;
+border: 1px solid lightgrey;
+border-radius: 2px;
+display: inline-block;
+line-height: 30px;
+
+}
+
+.contain-write-a-post-invivte {
+    margin-bottom: 10px;
+
+}
+
+.contain-post-invite {
     height: 30px;
-    width: 80%;
-    border: 2px solid lightgrey;
-    border-radius: 5px;
-    background-color: transparent;
+}
+
+.contain-write-logo{
+position: relative;
+height: 30px;
+width: 30px;
+background-color: #485696;
+color: white;
+border-radius: 3px;
+display: inline-block;
+top: 50%;
+transform: translateY(-37%)
 }
 
 
@@ -368,6 +406,24 @@ background-color: aliceblue;
     min-height: 100px;
     border-bottom: 1px solid lightgrey;
     font-size: 12px;
+}
+
+.contain-post-content {
+    overflow-wrap: break-word;
+    font-size: 12px;
+}
+
+
+.go-to-link {
+    position: relative;
+    height: 20px;
+    width: 30px;
+    color: white;
+    background-color: #45B5AC;
+    font-size: 12px;
+    border-radius: 3px;
+    float: right;
+    margin-right: 10px;
 }
 
 /* 4. ----------------- News */
