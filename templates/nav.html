@@ -14,7 +14,7 @@
 <div class="container-fluid">
 <div class="row">
 <div class="col-12 logo-bar">
-<img src="/static/images/small-logo.png" alt="logo" class="small-logo img-fluid vertical-center">
+<a href="{{url_for('dashboard') }}"><img src="/static/images/small-logo.png" alt="logo" class="small-logo img-fluid vertical-center"></a>
 </div>
 </div>
 </div>
@@ -50,6 +50,7 @@
 const ptr = PullToRefresh.init({
   mainElement: 'body',
   onRefresh() {
+    $(".loading").removeClass("d-none")
     window.location.reload();
   }
 });

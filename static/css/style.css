@@ -100,6 +100,16 @@ button {
     border: none !important;
 }
 
+.pointer {
+       cursor: pointer;
+}
+
+input:focus,
+select:focus,
+textarea:focus,
+button:focus {
+    outline: none;
+}
 
 
 /* Landing Page ------------ */ 
@@ -237,6 +247,12 @@ cursor: pointer;
     border-bottom: 2px solid lightgray;
 }
 
+.about_me {
+    resize: none;
+    height: 120px;
+
+}
+
 .username {
     font-weight: 600 !important;
 }
@@ -248,6 +264,15 @@ cursor: pointer;
 }
 
 /* 3. Posts -------------------- */
+
+.loading-gif {
+    margin-top: 5px;
+    height: 30px;
+    width: 30px;
+    text-align: center;
+}
+
+
 .contain-posts-section {
     margin-top: 20px;
     margin-bottom: 100px;
@@ -354,7 +379,24 @@ margin-left: 15px;
     margin-bottom: 5px;
 }
 
+.arrow-down-link {
+    font-size: 18px;
+    margin-right: 20px;
+    
+}
 
+.contain-arrow-dropdown {
+    margin-top: 60px;
+}
+
+.fa-flag {
+    color: red !important;
+}
+
+.warning {
+    color: rgb(240, 216, 112);
+    font-size: 18px;
+}
 
 /* Hide scrollbar for Chrome, Safari and Opera */
 body::-webkit-scrollbar {

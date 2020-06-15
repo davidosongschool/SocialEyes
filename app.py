@@ -42,15 +42,6 @@ def dashboard():
     if 'username' in session:
         user = users.find_one({'username': session['username']})
         posts = mongo.db.posts
-        # Display your own latest post
-        check_if_post_exists = posts.find_one({'posted_by': session['username']}, sort=[
-            ('_id', -1)])
-        if check_if_post_exists is not None:
-            my_own_post = check_if_post_exists
-        else:
-            # If they have not posted yet - give them a welcome message
-            my_own_post = {
-                'posted_by': session['username'], 'main_content': 'Welcome to SocialEyes! This is where your latest post will appear!'}
         following = []
         if user['following']:
             following = user['following']
@@ -64,7 +55,7 @@ def dashboard():
             if latest_post is not None:
                 posts_to_display.extend([latest_post])
 
-        return render_template('dashboard.html', user=user, my_own_post=my_own_post, posts_to_display=posts_to_display)
+        return render_template('dashboard.html', user=user, posts_to_display=posts_to_display)
     return render_template('landing.html')
 
 
@@ -146,7 +137,8 @@ def make_post():
     posts.insert_one({'main_content': request.form['main_content'],
                       'posted_by': session['username'],
                       'date_posted': date,
-                      'liked_by': (''),
+                      'liked_by': [],
+                      'reported_by': [],
                       'content_link': request.form['content_link'],
                       'short_url': short_url,
                       'post_avatar': post_avatar})
@@ -321,19 +313,46 @@ def delete_account():
     """
     if 'username' not in session:
         return redirect(url_for('landing'))
-    
+
     users = mongo.db.users
     posts = mongo.db.posts
     user = users.delete_one({'username': session['username']})
     post = posts.delete_many({'posted_by': session['username']})
 
-    
     session.clear()
     return redirect(url_for('landing'))
 
 
+@ app.route('/report', methods=['POST'])
+def report():
+    posts = mongo.db.posts
+    posts.update({'_id': ObjectId(request.form['id'])}, {
+                 "$push": {'reported_by': session['username']}})
+    return redirect(url_for('dashboard'))
 
 
+@ app.route('/remove_report', methods=['POST'])
+def remove_report():
+    posts = mongo.db.posts
+    posts.update({'_id': ObjectId(request.form['id'])}, {
+                 "$pull": {'reported_by': session['username']}})
+    return redirect(url_for('dashboard'))
+
+
+@ app.route('/add_like', methods=['POST'])
+def add_like():
+    posts = mongo.db.posts
+    posts.update({'_id': ObjectId(request.form['id'])}, {
+                 "$push": {'liked_by': session['username']}})
+    return redirect(url_for('dashboard'))
+
+
+@ app.route('/remove_like', methods=['POST'])
+def remove_like():
+    posts = mongo.db.posts
+    posts.update({'_id': ObjectId(request.form['id'])}, {
+                 "$pull": {'liked_by': session['username']}})
+    return redirect(url_for('dashboard'))
 
 
 def shorten(shorten_url):

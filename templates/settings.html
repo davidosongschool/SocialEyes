@@ -4,11 +4,11 @@
 <div class="container contain-under contain-links">
 	<div class="col-12 text-center">
 		
-			<div class="settings-button mx-auto" data-toggle="modal" data-target="#logoutModal">Logout</div>
+			<div class="settings-button mx-auto pointer" data-toggle="modal" data-target="#logoutModal">Logout</div>
 		
 	</div>
 	<div class="col-12 text-center">
-		<div class="settings-button mx-auto" data-toggle="modal" data-target="#deleteaccountModal">Delete my account
+		<div class="settings-button mx-auto pointer" data-toggle="modal" data-target="#deleteaccountModal">Delete my account
 		</div>
 	</div>
 
@@ -44,10 +44,10 @@
 				</div>
                 <div class="modal-footer text-center">
                 <div class="col-6 logout">
-               <a href="{{url_for('delete_account')}}"><span style="color: red"> Delete</span></a>
+               <a href="{{url_for('delete_account')}}"><span style="color: red" class="pointer"> Delete</span></a>
                 </div>
-                <div class="col-6">
-                <a href="" data-dismiss="modal">Cancel</a>
+                <div class="col-6 pointer">
+                <a href="" data-dismiss="modal" class="pointer">Cancel</a>
                 </div>
               </div>
 			</div>
