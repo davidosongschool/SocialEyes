@@ -119,8 +119,8 @@ def register_user():
                           'email': request.form['email'],
                           'date_registered': date,
                           'description': 'Tell Us About Yourself',
-                          'following': [""],
-                          'followers': [""],
+                          'following': [],
+                          'followers': [],
                           'discover': True,
                           'avatar': 'https://i.ibb.co/syp2Jpw/default-avatar.png'})
 
@@ -313,6 +313,27 @@ def display_profile(username):
     user_posts = find_posts
 
     return render_template('profile.html', user_posts=user_posts, username=username, user=user)
+
+
+@ app.route('/delete_account')
+def delete_account():
+    """ This function will remove the users account and all posts made by that user
+    """
+    if 'username' not in session:
+        return redirect(url_for('landing'))
+    
+    users = mongo.db.users
+    posts = mongo.db.posts
+    user = users.delete_one({'username': session['username']})
+    post = posts.delete_many({'posted_by': session['username']})
+
+    
+    session.clear()
+    return redirect(url_for('landing'))
+
+
+
+
 
 
 def shorten(shorten_url):

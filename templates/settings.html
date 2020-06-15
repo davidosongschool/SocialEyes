@@ -1,15 +1,61 @@
 {% extends 'nav.html' %}
 
 {% block content %}
-<div class="container contain-under">
-<div class="row">
-<div class="col-12">
-<ul>
-<li class="m-3">
-<a href="{{url_for('logout')}}"><button class="btn btn-primary">Logout</button></a>
-</li>
-</ul>
+<div class="container contain-under contain-links">
+	<div class="col-12 text-center">
+		
+			<div class="settings-button mx-auto" data-toggle="modal" data-target="#logoutModal">Logout</div>
+		
+	</div>
+	<div class="col-12 text-center">
+		<div class="settings-button mx-auto" data-toggle="modal" data-target="#deleteaccountModal">Delete my account
+		</div>
+	</div>
+
+
+	<!--Logout Modal-->
+	<div class="modal fade logout-modal" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="logoutLabel"
+		aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-body text-center">
+				<h5>Are you sure?</h5>
+				</div>
+                <div class="modal-footer text-center">
+                <div class="col-6 logout">
+               <a href="{{url_for('logout')}}">Logout</a>
+                </div>
+                <div class="col-6">
+                <a href="" data-dismiss="modal">Cancel</a>
+                </div>
+              </div>
+			</div>
+		</div>
+	</div>
+
+	<!--Delete Account Modal-->
+	<div class="modal fade logout-modal" id="deleteaccountModal" tabindex="-1" role="dialog" aria-labelledby="deleteaccountLabel"
+		aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-body text-center">
+				<h5>Are you sure?</h5>
+                <p style="color: red">Deleting your account will remove all previous posts and connections and cannot be reversed!</p>
+				</div>
+                <div class="modal-footer text-center">
+                <div class="col-6 logout">
+               <a href="{{url_for('delete_account')}}"><span style="color: red"> Delete</span></a>
+                </div>
+                <div class="col-6">
+                <a href="" data-dismiss="modal">Cancel</a>
+                </div>
+              </div>
+			</div>
+		</div>
+	</div>
+
+
+
 </div>
-</div>
-</div>
+
 {% endblock %}

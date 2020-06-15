@@ -12,8 +12,10 @@ Key:
 3.1 Write a post 
 3.2 View Posts
 4. News
-5. Footer Menu
-6. Media Queries
+5. Find Users
+6. Settings
+7. Footer Menu
+8. Media Queries
 
 ------------------------------------ */
 
@@ -450,9 +452,7 @@ color: #45B5AC;
 } 
 
 .news-button {
-    color: white !important;
-    border: none !important;
-    background-color: #45B5AC !important;
+border-right: 1px solid lightgrey;
 }
 
 
@@ -521,7 +521,39 @@ font-weight: 500;
     font-weight: 500;
 }
 
-/* 6. Footer Menu ---------------- */
+
+/* 6. Settings ----------- */ 
+
+
+.contain-links {
+    margin-top: 20vh;
+}
+
+.logout {
+    border-right: 1px solid lightgrey;
+}
+
+.logout-modal {
+    margin-top: 30vh;
+}
+
+
+.settings-button {
+    width: 80%;
+    height: 30px;
+    line-height: 30px;
+    border: 1px solid lightgrey;
+    border-radius: 3px;
+    color: grey;
+    margin-top: 10px;
+}
+
+
+
+
+
+
+/* 7. Footer Menu ---------------- */
 
 .footer-menu {
     height: 8vh;

@@ -1,54 +1,54 @@
 {% extends 'nav.html' %} {% block content %}
 <div class="container text-center news-container contain-under">
-  <h5 class="mt-5"><i class="far fa-newspaper footer-chart news-icon-header"></i></h5>
-  <ul class="country-news">
-    <li>
-      <form action="{{url_for('change_news')}}" method="POST">
-        <button class="{{class1}}" type="submit" name="country" value="ie">
+	<h5 class="mt-5"><i class="far fa-newspaper footer-chart news-icon-header"></i></h5>
+	<ul class="country-news">
+		<li>
+			<form action="{{url_for('change_news')}}" method="POST">
+				<button class="{{class1}}" type="submit" name="country" value="ie">
           Ireland
         </button>
-      </form>
-    </li>
-    <li>
-      <form action="{{url_for('change_news')}}" method="POST">
-        <button class="not-selected {{class2}}"  type="submit" name="country" value="us">
+			</form>
+		</li>
+		<li>
+			<form action="{{url_for('change_news')}}" method="POST">
+				<button class="not-selected {{class2}}"  type="submit" name="country" value="us">
           US
         </button>
-      </form>
-    </li>
-    <li>
-      <form action="{{url_for('change_news')}}" method="POST">
-        <button class="not-selected {{class3}}" type="submit" name="country" value="gb">
+			</form>
+		</li>
+		<li>
+			<form action="{{url_for('change_news')}}" method="POST">
+				<button class="not-selected {{class3}}" type="submit" name="country" value="gb">
           UK
         </button>
-      </form>
-    </li>
-  </ul>
-  <hr />
-  <div class="container">
-  <div class="row">
-    {% for n in response.articles%}
-    <div class="col-12 col-md-4">
-    <div class="card news-card shadow img-fluid">
-      <img src="{{n.urlToImage}}" class="card-img-top" alt="News-Article" />
-      <div class="card-body">
-        <p class="card-text">{{n.title}}}</p>
-        <a href="{{n.url}}" target="_blank" class="btn btn-primary news-button"
-          >Go to article</a
-        >
-        <a
-          href="{{n.url}}"
-          target="_blank"
-          class="btn btn-success post_news_button"
-          >Post Article</a
-        >
-        </div>
-      </div>
-    </div>
-    
-    {% endfor %}
-    </div>
-  </div>
+			</form>
+		</li>
+	</ul>
+	<hr />
+	<div class="container">
+		<div class="row">
+			{% for n in response.articles%}
+			<div class="col-12 col-md-4">
+				<div class="card news-card shadow img-fluid">
+					<img src="{{n.urlToImage}}" class="card-img-top" alt="News-Article" />
+					<div class="card-body">
+						<p class="card-text">{{n.title}}}</p>
+                        <hr/>
+						<div class="row text-center">
+							<div class="col-6 text-center news-button">
+								<a href="{{n.url}}" target="_blank">Read Article</a>
+							</div>
+							<div class="col-6 text-center">
+								<a href="{{n.url}}" target="_blank">Post</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			{% endfor %}
+		</div>
+	</div>
 </div>
 
 {% endblock %}
