@@ -521,6 +521,20 @@ font-weight: 500;
     margin-top: 50vh;
 }
 
+
+.big-find-users-2 {
+    height: 50px;
+    width: 40vw;
+    background-color:#45B5AC;
+    color: white;
+    margin-top: 5vh;
+}
+.big-find-users-2:hover {
+     background-color: #485696;
+}
+
+
+
 .big-find-users:hover {
  background-color: #45B5AC;
 }
@@ -568,7 +582,7 @@ font-weight: 500;
 
 
 .contain-links {
-    margin-top: 20vh;
+    margin-top: 10vh;
 }
 
 .logout {
@@ -590,7 +604,9 @@ font-weight: 500;
     margin-top: 10px;
 }
 
-
+.setting-logo {
+    width: 80%;
+}
 
 
 
@@ -642,7 +658,25 @@ font-weight: 500;
 }
 
 
+.setting-logo {
+    width: 40%;
+}
 
+.desktop-user-section {
+   
+    position: fixed;
+}
+
+.avatar {
+    height: 120px;
+    width: 120px;
+    padding: 10px;
+    border-radius: 30px;
+}
+
+.push {
+    border-right: 1px solid lightgrey;
+}
 
 
 }

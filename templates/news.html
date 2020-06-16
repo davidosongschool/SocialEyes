@@ -32,14 +32,15 @@
 				<div class="card news-card shadow img-fluid">
 					<img src="{{n.urlToImage}}" class="card-img-top" alt="News-Article" />
 					<div class="card-body">
-						<p class="card-text">{{n.title}}}</p>
+						<p class="card-text">{{n.title}}</p>
                         <hr/>
 						<div class="row text-center">
 							<div class="col-6 text-center news-button">
-								<a href="{{n.url}}" target="_blank">Read Article</a>
+								<a href="{{n.url}}" target="_blank" class="get_link">Read Article</a>
 							</div>
 							<div class="col-6 text-center">
-								<a href="{{n.url}}" target="_blank">Post</a>
+								<a href="" data-toggle="modal" data-target="#postModal" class="post-about-news" id="{{n.url}}">Post</a>
+                           
 							</div>
 						</div>
 					</div>
@@ -47,6 +48,76 @@
 			</div>
 
 			{% endfor %}
+
+<!--Post Modal-->
+  <div
+    class="modal fade"
+    id="postModal"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="postModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button
+            type="button"
+            class="close close-icon"
+            data-dismiss="modal"
+            aria-label="Close"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body mx-auto">
+          <div class="reminder">
+            <i class="fas fa-exclamation-triangle alert-icon mr-1"></i
+            ><strong
+              >Reminder: Posts on SocialEyes are all about discussing content.
+              Every post must include a link to the material you are speaking
+              about.</strong
+            >
+          </div>
+
+          <form action="{{url_for('make_post')}}" method="POST">
+            <div class="row">
+              <div class="contain-icon">
+                <i class="fas fa-link input-icon"></i>
+              </div>
+              <input
+                type="url"
+                name="content_link"
+                id="content_link"
+                class="input-link"
+                placeholder="http://"
+                required
+              />
+            </div>
+            <div class="row">
+              <div class="contain-icon">
+                <i class="fas fa-pen-alt input-icon"></i>
+              </div>
+
+              <textarea
+                class="post-textarea"
+                name="main_content"
+                placeholder="Write post..."
+                maxlength="250"
+                required
+              ></textarea>
+            </div>
+            <br />
+            <div class="row">
+              <div class="contain-icon"></div>
+              <button type="submit" class="post-btn">Post</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
 		</div>
 	</div>
 </div>
