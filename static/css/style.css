@@ -263,6 +263,21 @@ cursor: pointer;
     
 }
 
+.profile-btn {
+    width: 200px !important;
+    background-color: #45B5AC !important;
+    color: white !important;
+    border: none !important;
+    float: right;
+}
+
+.profile-btn:hover {
+    background-color: #485696 !important;
+
+}
+
+
+
 /* 3. Posts -------------------- */
 
 .loading-gif {

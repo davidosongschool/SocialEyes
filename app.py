@@ -190,7 +190,7 @@ def start_following():
     users.update({'username': session['username']}, {
                  "$push": {'following': request.form['follow_username']}})
 
-    return redirect(url_for('find'))
+    return redirect("/users/" + request.form['follow_username'])
 
 
 @ app.route('/unfollow', methods=['POST'])
@@ -203,9 +203,7 @@ def unfollow():
     users.update({'username': session['username']}, {
                  "$pull": {'following': request.form['unfollow_username']}})
 
-    bs3 = "d-none"
-    bs4 = "d-block"
-    return redirect(url_for('find'))
+    return redirect(url_for('dashboard'))
 
 
 @ app.route('/settings')
@@ -292,19 +290,35 @@ def display_profile(username):
     users = mongo.db.users
     user = users.find_one({'username': username})
 
+    # Check that the user exists
     profile_username = username.lower()
     existing_user = users.find_one({'username': profile_username})
-
+    # If User is not found - show error
     if existing_user is None:
         return render_template('oops.html')
+
     posts = mongo.db.posts
-    # Display your own latest post
-    find_posts = posts.find({'posted_by': username}, sort=[
+    posts_to_display = []
+    # Find all posts by that user and order them by latest to earliest
+    get_posts = posts.find({'posted_by': username}, sort=[
         ('_id', -1)])
+    # Don't add any blank posts
+    if get_posts is not None:
+        for n in get_posts:
+            posts_to_display.extend([n])
 
-    user_posts = find_posts
+    # Check if user is following the profile or not
+    following_users = users.find_one({'username': session['username']})
+    following = 0
+    for n in following_users['following']:
+        if n == existing_user['username']:
+            following = 1
 
-    return render_template('profile.html', user_posts=user_posts, username=username, user=user)
+    # Check if its your own profile
+    if username == session['username']:
+        following = 2
+
+    return render_template('profile.html', username=username, user=user, posts_to_display=posts_to_display, following=following)
 
 
 @ app.route('/delete_account')
