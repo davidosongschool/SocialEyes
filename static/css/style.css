@@ -111,6 +111,15 @@ button:focus {
     outline: none;
 }
 
+.oops {
+    margin-top: 20vh;
+}
+.safe-btn {
+    width: 200px;
+    height: 40px;
+    color: antiquewhite;
+    background-color: #485696;
+}
 
 /* Landing Page ------------ */ 
 .page-container {

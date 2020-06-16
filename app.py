@@ -354,6 +354,7 @@ def delete_account():
     user = users.delete_one({'username': session['username']})
     post = posts.delete_many({'posted_by': session['username']})
 
+
     session.clear()
     return redirect(url_for('landing'))
 
