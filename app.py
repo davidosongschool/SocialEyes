@@ -102,12 +102,16 @@ def register_user():
     if 'username' in session:
         return redirect(url_for('dashboard'))
     users = mongo.db.users
+
     entered_username = request.form['username'].lower()
     entered_username = entered_username.replace(" ", "")
     entered_email = request.form['email'].lower()
+    entered_email = entered_email.replace(" ", "")
     existing_user = users.find_one({'username': entered_username})
     existing_email = users.find_one({'email': entered_email})
 
+
+    
     # Check if the username or email already exists
     if existing_user is None and existing_email is None:
         encrypted = bcrypt.hashpw(
@@ -301,6 +305,7 @@ def change_avatar():
 def display_profile(username):
     if 'username' not in session:
         return redirect(url_for('landing'))
+    username = username.lower()
     users = mongo.db.users
     user = users.find_one({'username': username})
 
