@@ -103,6 +103,7 @@ def register_user():
         return redirect(url_for('dashboard'))
     users = mongo.db.users
     entered_username = request.form['username'].lower()
+    entered_username = entered_username.replace(" ", "")
     entered_email = request.form['email'].lower()
     existing_user = users.find_one({'username': entered_username})
     existing_email = users.find_one({'email': entered_email})
