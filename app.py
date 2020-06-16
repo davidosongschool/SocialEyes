@@ -393,6 +393,6 @@ def shorten(shorten_url):
 
 
 if __name__ == '__main__':
-    os.environ.get('key')
+    app.secret_key = os.environ.get('key')
     app.run(host=os.environ.get('IP'),
             port=int(os.environ.get('PORT')))
