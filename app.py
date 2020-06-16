@@ -72,8 +72,12 @@ def login():
     return render_template('login.html')
 
 
-@ app.route('/login_user', methods=['POST'])
+@ app.route('/login_user', methods=['POST', 'GET'])
 def login_user():
+
+    if request.method == 'GET':
+        return redirect(url_for('dashboard'))
+
     users = mongo.db.users
     username_entered = request.form['username'].lower()
     login_user = users.find_one({'username': username_entered})
@@ -101,6 +105,11 @@ def register_user():
     """
     if 'username' in session:
         return redirect(url_for('dashboard'))
+   
+    if request.method == 'GET':
+        return redirect(url_for('dashboard'))
+
+
     users = mongo.db.users
 
     entered_username = request.form['username'].lower()
@@ -134,8 +143,12 @@ def register_user():
     return render_template('landing.html', error=error)
 
 
-@ app.route('/make_post', methods=["POST"])
+@ app.route('/make_post', methods=["POST", 'GET'])
 def make_post():
+
+    if request.method == 'GET':
+        return redirect(url_for('dashboard'))
+
     posts = mongo.db.posts
     date = str(datetime.date.today())
     # To get user info (their avatar)
@@ -156,8 +169,12 @@ def make_post():
                       'post_avatar': post_avatar})
     return redirect(url_for('dashboard'))
 
-@ app.route('/delete_post', methods=['POST'])
+
+@ app.route('/delete_post', methods=['POST', 'GET'])
 def delete_post():
+
+    if request.method == 'GET':
+        return redirect(url_for('dashboard'))
     posts = mongo.db.posts
     posts.delete_one({'_id': ObjectId(request.form['post_id'])})
     return redirect(url_for('dashboard'))
@@ -177,11 +194,14 @@ def find():
     return render_template("follow.html", following=following, length=length)
 
 
-@ app.route('/search_results', methods=['POST'])
+@ app.route('/search_results', methods=['POST', 'GET'])
 def search_results():
 
     if 'username' not in session:
         return redirect(url_for('landing'))
+
+    if request.method == 'GET':
+        return redirect(url_for('dashboard'))
 
     searched = request.form['searched_user']
     # Don't show yourself in search results
@@ -198,11 +218,14 @@ def search_results():
     return render_template('follow.html', results=results, my_username=my_username, user=user, following=following, length=length)
 
 
-@ app.route('/start_following', methods=['POST'])
+@ app.route('/start_following', methods=['POST', 'GET'])
 def start_following():
 
     if 'username' not in session:
         return redirect(url_for('landing'))
+
+    if request.method == 'GET':
+        return redirect(url_for('dashboard'))
 
     users = mongo.db.users
     users.update({'username': session['username']}, {
@@ -211,11 +234,14 @@ def start_following():
     return redirect("/users/" + request.form['follow_username'])
 
 
-@ app.route('/unfollow', methods=['POST'])
+@ app.route('/unfollow', methods=['POST', 'GET'])
 def unfollow():
 
     if 'username' not in session:
         return redirect(url_for('landing'))
+
+    if request.method == 'GET':
+        return redirect(url_for('dashboard'))
 
     users = mongo.db.users
     users.update({'username': session['username']}, {
@@ -231,10 +257,14 @@ def settings():
     return render_template('settings.html')
 
 
-@ app.route('/about_me', methods=['POST'])
+@ app.route('/about_me', methods=['POST', 'GET'])
 def about_me():
     if 'username' not in session:
         return redirect(url_for('landing'))
+
+    if request.method == 'GET':
+        return redirect(url_for('dashboard'))
+
     users = mongo.db.users
     users.update({'username': session['username']}, {"$set": {
                  'description': request.form['description']}})
@@ -257,11 +287,15 @@ def get_news():
     return render_template('news.html', response=response.json(), class1=class1)
 
 
-@ app.route('/change_news', methods=['POST'])
+@ app.route('/change_news', methods=['POST', 'GET'])
 def change_news():
 
     if 'username' not in session:
         return redirect(url_for('landing'))
+
+    if request.method == 'GET':
+        return redirect(url_for('dashboard'))
+
     country = request.form['country']
 
     url = ('http://newsapi.org/v2/top-headlines?'
@@ -289,10 +323,13 @@ def change_news():
     return render_template('news.html', response=response.json(), class1=class1, class2=class2, class3=class3)
 
 
-@ app.route('/change_avatar', methods=['POST'])
+@ app.route('/change_avatar', methods=['POST', 'GET'])
 def change_avatar():
     if 'username' not in session:
         return redirect(url_for('landing'))
+
+    if request.method == 'GET':
+        return redirect(url_for('dashboard'))
 
     img_url = request.form['avatar-change']
     users = mongo.db.users
@@ -359,32 +396,47 @@ def delete_account():
     return redirect(url_for('landing'))
 
 
-@ app.route('/report', methods=['POST'])
+@ app.route('/report', methods=['POST', 'GET'])
 def report():
+    if request.method == 'GET':
+        return redirect(url_for('dashboard'))
+
     posts = mongo.db.posts
     posts.update({'_id': ObjectId(request.form['id'])}, {
                  "$push": {'reported_by': session['username']}})
     return redirect(url_for('dashboard'))
 
 
-@ app.route('/remove_report', methods=['POST'])
+@ app.route('/remove_report', methods=['POST', 'GET'])
 def remove_report():
+
+    if request.method == 'GET':
+        return redirect(url_for('dashboard'))
+
     posts = mongo.db.posts
     posts.update({'_id': ObjectId(request.form['id'])}, {
                  "$pull": {'reported_by': session['username']}})
     return redirect(url_for('dashboard'))
 
 
-@ app.route('/add_like', methods=['POST'])
+@ app.route('/add_like', methods=['POST', 'GET'])
 def add_like():
+
+    if request.method == 'GET':
+        return redirect(url_for('dashboard'))
+
     posts = mongo.db.posts
     posts.update({'_id': ObjectId(request.form['id'])}, {
                  "$push": {'liked_by': session['username']}})
     return redirect(url_for('dashboard'))
 
 
-@ app.route('/remove_like', methods=['POST'])
+@ app.route('/remove_like', methods=['POST', 'GET'])
 def remove_like():
+
+    if request.method == 'GET':
+        return redirect(url_for('dashboard'))
+
     posts = mongo.db.posts
     posts.update({'_id': ObjectId(request.form['id'])}, {
                  "$pull": {'liked_by': session['username']}})
