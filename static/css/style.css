@@ -112,7 +112,7 @@ button:focus {
 }
 
 .oops {
-    margin-top: 20vh;
+    margin-top: 20vh !important;
 }
 .safe-btn {
     width: 200px;
