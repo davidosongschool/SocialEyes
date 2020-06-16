@@ -75,11 +75,12 @@ def login():
 @ app.route('/login_user', methods=['POST'])
 def login_user():
     users = mongo.db.users
-    login_user = users.find_one({'username': request.form['username']})
+    username_entered = request.form['username'].lower()
+    login_user = users.find_one({'username': username_entered})
 
     if login_user:
         if bcrypt.hashpw(request.form['password'].encode('utf-8'), login_user['password']) == login_user['password']:
-            session['username'] = request.form['username']
+            session['username'] = username_entered
             return redirect(url_for('dashboard'))
 
     error = "Incorrect Login! Try Again"
