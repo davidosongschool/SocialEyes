@@ -250,6 +250,9 @@ cursor: pointer;
 .about_me {
     resize: none;
     height: 120px;
+    width: 100%;
+    border: none;
+
 
 }
 
@@ -287,6 +290,10 @@ cursor: pointer;
     text-align: center;
 }
 
+
+.your_own_post {
+    border-left: 10px solid #F9DC5C;
+}
 
 .contain-posts-section {
     margin-top: 20px;

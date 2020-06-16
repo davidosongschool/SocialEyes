@@ -46,6 +46,12 @@ def dashboard():
         if user['following']:
             following = user['following']
         posts_to_display = []
+        no_posts = 0
+        # Your own latest post
+        your_own_post = posts.find_one({'posted_by': session['username']}, sort=[
+            ('_id', -1)])
+        if your_own_post is None:
+            no_posts = 1
 
         for username in following:
             # Find the latest post be each user the follow
@@ -55,7 +61,7 @@ def dashboard():
             if latest_post is not None:
                 posts_to_display.extend([latest_post])
 
-        return render_template('dashboard.html', user=user, posts_to_display=posts_to_display)
+        return render_template('dashboard.html', user=user, posts_to_display=posts_to_display, your_own_post=your_own_post, no_posts=no_posts)
     return render_template('landing.html')
 
 
@@ -142,6 +148,12 @@ def make_post():
                       'content_link': request.form['content_link'],
                       'short_url': short_url,
                       'post_avatar': post_avatar})
+    return redirect(url_for('dashboard'))
+
+@ app.route('/delete_post', methods=['POST'])
+def delete_post():
+    posts = mongo.db.posts
+    posts.delete_one({'_id': ObjectId(request.form['post_id'])})
     return redirect(url_for('dashboard'))
 
 
@@ -318,7 +330,9 @@ def display_profile(username):
     if username == session['username']:
         following = 2
 
-    return render_template('profile.html', username=username, user=user, posts_to_display=posts_to_display, following=following)
+    my_username = session['username']
+
+    return render_template('profile.html', username=username, user=user, posts_to_display=posts_to_display, following=following, my_username=my_username)
 
 
 @ app.route('/delete_account')

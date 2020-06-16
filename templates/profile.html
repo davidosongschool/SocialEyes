@@ -51,7 +51,7 @@
 					<div class="col-12 text-center">
                     <!--Some logic in here that renders 'follow'/'unfollow'-->
                     {% if following == 1 %}
-                   
+                
                         <form method="POST" action="{{url_for('unfollow')}}">
 						<button type="submit" name="unfollow_username" value="{{user.username}}"><div class="settings-button mx-auto pointer profile-btn">Unfollow</div></button>
                         </form>
@@ -155,7 +155,7 @@
 										<div class="dropdown-menu">
 											{% set reported = namespace(true=0) %}
 											<!--Some Logic that renders report button depending on if user had reported this post already or not-->
-											{% for x in n['reported_by'] %} {% if x == user.username %} {% set
+											{% for x in n['reported_by'] %} {% if x == my_username %} {% set
             reported.true = 1 %} {% endif%} {% endfor %} {% if reported.true ==
             0 %}
 											<form method="POST" action="{{url_for('report')}}">
@@ -182,7 +182,23 @@
               </button>
 											</form>
 											{% endif %}
-										</div>
+										
+                                    <!--If it is their own page - give them the option to delete the post-->
+                                    {% if n['posted_by'] == my_username %}
+                <form method="POST" action="{{url_for('delete_post')}}">
+                  <button
+                    type="submit"
+                    class="dropdown-item"
+                    name="post_id"
+                    value="{{n['_id']}}"
+                    href="#"
+                  >
+                    Delete Post<i class="fas fa-times ml-2"></i>
+                  </button>
+                </form>
+                
+                {% endif %}
+                </div>
 									</div>
 								</div>
 							</div>

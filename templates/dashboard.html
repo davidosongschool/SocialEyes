@@ -2,42 +2,50 @@
 
 <!--Mobile User Section-->
 <div class="container contain-user-info d-block d-md-none">
-	<div class="row">
-		<div class="col-4">
-			<img
+  <div class="row">
+    <div class="col-4">
+      <img
         src="{{ user.avatar }}"
         class="avatar complete-center"
         data-toggle="modal"
         data-target="#changeavatarModal"
       />
     </div>
-			<div class="col-8">
-				<ul class="pt-2">
-					<li>
-						<i class="far fa-user pr-1"></i><a
-							href="users/{{user.username}}"><span class="username">{{user.username}}</span></a>
-					</li>
-					<li>
-						<span class="description">{{user.description}}</span><i
+    <div class="col-8">
+      <ul class="pt-2">
+        <li>
+          <i class="far fa-user pr-1"></i
+          ><a href="users/{{user.username}}"
+            ><span class="username">{{user.username}}</span></a
+          >
+        </li>
+        <li>
+          <span class="description">{{user.description}}</span
+          ><i
             class="far fa-edit edit-desc"
             data-toggle="modal"
             data-target="#aboutmeModal"
           ></i>
-					</li>
-				</ul>
-			</div>
-		</div>
-	</div>
-    
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
 
-	<!--Change Avatar Modal-->
-	<div class="modal fade" id="changeavatarModal" tabindex="-1" role="dialog" aria-labelledby="changeavatarLabel"
-		aria-hidden="true">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel">Choose an Avatar</h5>
-					<button
+<!--Change Avatar Modal-->
+<div
+  class="modal fade"
+  id="changeavatarModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="changeavatarLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Choose an Avatar</h5>
+        <button
           type="button"
           class="close close-icon"
           data-dismiss="modal"
@@ -45,13 +53,13 @@
         >
           <span aria-hidden="true">&times;</span>
         </button>
-				</div>
-				<div class="modal-body text-center">
-					<!--Display available avatars-->
-					<ul class="choose-avatar-list">
-						<li>
-							<form action="{{url_for('change_avatar')}}" method="POST">
-								<button
+      </div>
+      <div class="modal-body text-center">
+        <!--Display available avatars-->
+        <ul class="choose-avatar-list">
+          <li>
+            <form action="{{url_for('change_avatar')}}" method="POST">
+              <button
                 type="submit"
                 name="avatar-change"
                 value="https://i.ibb.co/MsyTq8J/male2.png"
@@ -61,11 +69,11 @@
                   alt="avatar-one"
                 />
               </button>
-							</form>
-						</li>
-						<li>
-							<form action="{{url_for('change_avatar')}}" method="POST">
-								<button
+            </form>
+          </li>
+          <li>
+            <form action="{{url_for('change_avatar')}}" method="POST">
+              <button
                 type="submit"
                 name="avatar-change"
                 value="https://i.ibb.co/0fTHwCQ/female.png"
@@ -75,11 +83,11 @@
                   alt="avatar-two"
                 />
               </button>
-							</form>
-						</li>
-						<li>
-							<form action="{{url_for('change_avatar')}}" method="POST">
-								<button
+            </form>
+          </li>
+          <li>
+            <form action="{{url_for('change_avatar')}}" method="POST">
+              <button
                 type="submit"
                 name="avatar-change"
                 value="https://i.ibb.co/N9q0L0D/female2.png"
@@ -89,11 +97,11 @@
                   alt="avatar-three"
                 />
               </button>
-							</form>
-						</li>
-						<li>
-							<form action="{{url_for('change_avatar')}}" method="POST">
-								<button
+            </form>
+          </li>
+          <li>
+            <form action="{{url_for('change_avatar')}}" method="POST">
+              <button
                 type="submit"
                 name="avatar-change"
                 value="https://i.ibb.co/LJ5jfdG/avataaars.png"
@@ -103,11 +111,11 @@
                   alt="avatar-four"
                 />
               </button>
-							</form>
-						</li>
-						<li>
-							<form action="{{url_for('change_avatar')}}" method="POST">
-								<button
+            </form>
+          </li>
+          <li>
+            <form action="{{url_for('change_avatar')}}" method="POST">
+              <button
                 type="submit"
                 name="avatar-change"
                 value="https://i.ibb.co/PwBn8M6/sunny.png"
@@ -117,11 +125,11 @@
                   alt="avatar-five"
                 />
               </button>
-							</form>
-						</li>
-						<li>
-							<form action="{{url_for('change_avatar')}}" method="POST">
-								<button
+            </form>
+          </li>
+          <li>
+            <form action="{{url_for('change_avatar')}}" method="POST">
+              <button
                 type="submit"
                 name="avatar-change"
                 value="https://i.ibb.co/vjbhkP1/sunny2.png"
@@ -131,312 +139,505 @@
                   alt="avatar-six"
                 />
               </button>
-							</form>
-						</li>
-					</ul>
-				</div>
-			</div>
-		</div>
-	</div>
+            </form>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
 
-	<!--About Modal-->
-	<div class="modal fade logout-modal" id="aboutmeModal" tabindex="-1" role="dialog" aria-labelledby="aboutmeLabel"
-		aria-hidden="true">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-body text-center">
-					<form action="{{url_for('about_me')}}" method="POST">
-						<textarea
+<!--About Modal-->
+<div
+  class="modal fade logout-modal"
+  id="aboutmeModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="aboutmeLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-body text-center">
+        <form action="{{url_for('about_me')}}" method="POST">
+          <textarea
             name="description"
             placeholder="About me..."
             maxlength="40"
             class="about_me"
           ></textarea>
-						<br />
-						<hr />
-						<div class="row">
-							<div class="col-6 logout">
-								<button type="submit" href="{{url_for('dashboard')}}">
+          <br />
+          <hr />
+          <div class="row">
+            <div class="col-6 logout">
+              <button type="submit" href="{{url_for('dashboard')}}">
                 Save
               </button>
-							</div>
-							<div class="col-6">
-								<a href="" data-dismiss="modal">Cancel</a>
-							</div>
-						</div>
-					</form>
-				</div>
-			</div>
-		</div>
-	</div>
-
-	<div class="contain-entire-post">
-		<div class="row ml-3 mr-3">
-        <div class="col-4 push"></div>
-			<div class="col-3 d-none d-md-block desktop-user-section">
-				<div class="row">
-					<div class="col-6 text-center">
-						<img
-        src="{{ user.avatar }}"
-        class="avatar"
-        data-toggle="modal"
-        data-target="#changeavatarModal"
-      /> </div>
-						<div class="col-6">
-							<ul class="pt-5">
-								<li>
-									<i class="far fa-user pr-1"></i><a
-										href="users/{{user.username}}"><span class="username">{{user.username}}</span></a>
-								</li>
-								<li>
-									<span class="description">{{user.description}}</span><i
-            class="far fa-edit edit-desc pointer"
-            data-toggle="modal"
-            data-target="#aboutmeModal"
-          ></i>
-								</li>
-							</ul>
-						</div>
-					</div>
-					<div class="col-12 text-center">
-						<a href="/users/{{user.username}}"><div class="settings-button pointer profile-btn">My Profile</div></a>
-					</div>
-					<div class="col-12 text-center">
-						<div class="settings-button  pointer profile-btn" data-toggle="modal" data-target="#logoutModal">
-							Logout</div>
-						<!--Logout Modal-->
-			
-					</div>
-                    
-				</div>
-				<div class="col-12 col-md-8">
-					<!--Write a post-->
-					<div class="container contain-write-a-post-invivte">
-						<div class="row">
-							<div class="col-12 text-center">
-								<div class="loading d-none">
-									<img src="/static/images/load-post.gif" class="loading-gif"></div>
-									<div class="click-to-open-post pl-1 text-left pointer" data-toggle="modal"
-										data-target="#postModal">
-										Post Something..
-									</div>
-									<div class="contain-write-logo">
-										<i
-            class="fas fa-pen-alt complete-center pointer"
-            data-toggle="modal"
-            data-target="#postModal"
-          ></i>
-									</div>
-								</div>
-							</div>
-						</div>
-
-						<!--Post Modal-->
-
-						<div class="modal fade" id="postModal" tabindex="-1" role="dialog"
-							aria-labelledby="postModalLabel" aria-hidden="true">
-							<div class="modal-dialog" role="document">
-								<div class="modal-content">
-									<div class="modal-header">
-										<button
-            type="button"
-            class="close close-icon"
-            data-dismiss="modal"
-            aria-label="Close"
-          >
-            <span aria-hidden="true">&times;</span>
-          </button>
-									</div>
-									<div class="modal-body mx-auto">
-										<div class="reminder">
-											<i class="fas fa-exclamation-triangle alert-icon mr-1"></i><strong
-              >Reminder: Posts on SocialEyes are all about discussing content.
-              Every post must include a link to the material you are speaking
-              about.</strong>
-										</div>
-
-										<form action="{{url_for('make_post')}}" method="POST">
-											<div class="row">
-												<div class="contain-icon">
-													<i class="fas fa-link input-icon"></i>
-												</div>
-												<input
-                type="url"
-                name="content_link"
-                class="input-link"
-                placeholder="http://"
-                required
-              />
             </div>
-												<div class="row">
-													<div class="contain-icon">
-														<i class="fas fa-pen-alt input-icon"></i>
-													</div>
+            <div class="col-6">
+              <a href="" data-dismiss="modal">Cancel</a>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
 
-													<textarea
-                class="post-textarea"
-                name="main_content"
-                placeholder="Write post..."
-                maxlength="250"
-                required
-              ></textarea>
-												</div>
-												<br />
-												<div class="row">
-													<div class="contain-icon"></div>
-													<button type="submit" class="post-btn">Post</button>
-												</div>
-										</form>
-									</div>
-								</div>
-							</div>
-						</div>
-
-						<!--Followers Posts-->
-						<div class="contain-posts-section">
-                        <!--Show the user the option to follow people if there is nothing on their feed-->
-                            {% if posts_to_display|length < 1 %}
-                            <div class="text-center">
-                            <h4 class="pt-5"><strong>Looks like you're not following anyone yet!</strong></h4>
-                            <a href="/find"><button class="big-find-users-2">Find Users to Follow</button></a>
-                            </div>
-                            {% else %}
-							{% for n in posts_to_display %}
-							<div class="container contain-post">
-								<div class="row">
-									<div class="col-3 text-center">
-										<div class="mt-3">
-											<a href="/users/{{n['posted_by']}}" alt="Go to user page" class="mt-2"><img
-                src="{{n['post_avatar']}}"
-                style="height: 30px; width: 30px;"
-            /></a>
-												<ul>
-													<li>
-														<i
-                  class="far fa-user pt-1 pr-1 pl-1 mt-2"
-                  style="font-size: 8px;"
-                ></i>{{n['posted_by']}}
-													</li>
-													<li>
-														<i
-                  class="far fa-calendar-alt pr-1 pl-1"
-                  style="font-size: 8px;"
-                ></i>{{n['date_posted']}}
-													</li>
-													<!--Some Logic here to display heart icon depending on if the user has liked the post or not-->
-													{% set liked = namespace(true=0) %}
-													<!--Some Logic that renders report button depending on if user had reported this post already or not-->
-													{% for x in n['liked_by'] %} {% if x == user.username %} {% set
-              liked.true = 1 %} {% endif %} {% endfor %}
-													<li>
-														{% if liked.true == 0 %}
-														<form method="POST" action="{{url_for('add_like')}}">
-															<button type="submit" name="id" value="{{n['_id']}}">
-                    <i class="far fa-heart pr-1 pt-3"></i>
-                  </button>
-														</form>
-														<p class="pr-1">({{n['liked_by']|length}})</p>
-														{% else %}
-														<form method="POST" action="{{url_for('remove_like')}}">
-															<button type="submit" name="id" value="{{n['_id']}}">
-                    <i class="fas fa-heart pr-1 pt-3" style="color: red;"></i>
-                  </button>
-														</form>
-														<p class="pr-1">({{n['liked_by']|length}})</p>
-														{% endif %}
-													</li>
-													<!--Conditionally show a reported button to learn more if more than two users report the post-->
-													{% if n['reported_by']|length > 1 %}
-													<li>
-														<div class="contain-reported">
-															<i
-                    class="fas fa-exclamation-triangle pr-1 pt-2 warning"
-                    data-toggle="modal"
-                    data-target="#reported_modal"
-                  ></i>
-
-										
-														</div>
-													</li>
-													{% endif %}
-												</ul>
-										</div>
-									</div>
-									<div class="col-7 main-content-container">
-										{{n['main_content']}}
-									</div>
-									<div class="col-2">
-										<div class="contain-link text-right">
-											<a href="{{n['content_link']}}" target="_blank">
-												<div class="go-to-link shadow-sm mt-2">
-													<i class="fas fa-link complete-center"></i></div>
-											</a>
-										</div>
-									</div>
-								</div>
-								<div class="row">
-									<div class="col-12 contain-arrow-dropdown text-right">
-										<!--Dropdown-->
-										<a data-toggle="dropdown" href="#" class="arrow-down-link" aria-haspopup="true"
-											aria-expanded="false"><i class="fas fa-sort-down"></i></a>
-										<div class="dropdown-menu">
-											{% set reported = namespace(true=0) %}
-											<!--Some Logic that renders report button depending on if user had reported this post already or not-->
-											{% for x in n['reported_by'] %} {% if x == user.username %} {% set
-            reported.true = 1 %} {% endif%} {% endfor %} {% if reported.true ==
-            0 %}
-											<form method="POST" action="{{url_for('report')}}">
-												<button
-                class="dropdown-item"
-                type="submit"
-                href=""
-                name="id"
-                value="{{n['_id']}}"
+<div class="contain-entire-post">
+  <div class="row ml-3 mr-3">
+    <div class="col-4 push"></div>
+    <div class="col-3 d-none d-md-block desktop-user-section">
+      <div class="row">
+        <div class="col-6 text-center">
+          <img
+            src="{{ user.avatar }}"
+            class="avatar"
+            data-toggle="modal"
+            data-target="#changeavatarModal"
+          />
+        </div>
+        <div class="col-6">
+          <ul class="pt-5">
+            <li>
+              <i class="far fa-user pr-1"></i
+              ><a href="users/{{user.username}}"
+                ><span class="username">{{user.username}}</span></a
               >
-                Report Post<i class="fas fa-flag ml-2"></i>
-              </button>
-											</form>
-											{% endif %} {% if reported.true == 1 %}
-											<form method="POST" action="{{url_for('remove_report')}}">
-												<button
-                type="submit"
-                class="dropdown-item"
-                name="id"
-                value="{{n['_id']}}"
-                href="#"
+            </li>
+            <li>
+              <span class="description">{{user.description}}</span
+              ><i
+                class="far fa-edit edit-desc pointer"
+                data-toggle="modal"
+                data-target="#aboutmeModal"
+              ></i>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-12 text-center">
+        <a href="/users/{{user.username}}"
+          ><div class="settings-button pointer profile-btn">My Profile</div></a
+        >
+      </div>
+      <div class="col-12 text-center">
+        <div
+          class="settings-button pointer profile-btn"
+          data-toggle="modal"
+          data-target="#logoutModal"
+        >
+          Logout
+        </div>
+        <!--Logout Modal-->
+      </div>
+    </div>
+    <div class="col-12 col-md-8">
+      <!--Write a post-->
+      <div class="container contain-write-a-post-invivte">
+        <div class="row">
+          <div class="col-12 text-center">
+            <div class="loading d-none">
+              <img src="/static/images/load-post.gif" class="loading-gif" />
+            </div>
+
+            <div
+              class="click-to-open-post pl-1 text-left pointer"
+              data-toggle="modal"
+              data-target="#postModal"
+            >
+              Post Something..
+            </div>
+            <div class="contain-write-logo">
+              <i
+                class="fas fa-pen-alt complete-center pointer"
+                data-toggle="modal"
+                data-target="#postModal"
+              ></i>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!--Post Modal-->
+
+      <div
+        class="modal fade"
+        id="postModal"
+        tabindex="-1"
+        role="dialog"
+        aria-labelledby="postModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button
+                type="button"
+                class="close close-icon"
+                data-dismiss="modal"
+                aria-label="Close"
               >
-                Remove Report<i class="fas fa-times ml-2"></i>
+                <span aria-hidden="true">&times;</span>
               </button>
-											</form>
-											{% endif %}
-										</div>
-									</div>
-								</div>
-							</div>
-							{% endfor %}
-                            {% endif %}
-						</div>
-					</div>
-				</div>
-			</div>
-	<!--Logout Modal-->
-	<div class="modal fade logout-modal" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="logoutLabel"
-		aria-hidden="true">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-body text-center">
-				<h5>Are you sure?</h5>
-				</div>
-                <div class="modal-footer text-center">
-                <div class="col-6 logout">
-               <a href="{{url_for('logout')}}">Logout</a>
-                </div>
-                <div class="col-6">
-                <a href="" data-dismiss="modal">Cancel</a>
-                </div>
+            </div>
+            <div class="modal-body mx-auto">
+              <div class="reminder">
+                <i class="fas fa-exclamation-triangle alert-icon mr-1"></i
+                ><strong
+                  >Reminder: Posts on SocialEyes are all about discussing
+                  content. Every post must include a link to the material you
+                  are speaking about.</strong
+                >
               </div>
-			</div>
-		</div>
-	</div>
 
-			{% endblock %}
+              <form action="{{url_for('make_post')}}" method="POST">
+                <div class="row">
+                  <div class="contain-icon">
+                    <i class="fas fa-link input-icon"></i>
+                  </div>
+                  <input
+                    type="url"
+                    name="content_link"
+                    class="input-link"
+                    placeholder="http://"
+                    required
+                  />
+                </div>
+                <div class="row">
+                  <div class="contain-icon">
+                    <i class="fas fa-pen-alt input-icon"></i>
+                  </div>
+
+                  <textarea
+                    class="post-textarea"
+                    name="main_content"
+                    placeholder="Write post..."
+                    maxlength="250"
+                    required
+                  ></textarea>
+                </div>
+                <br />
+                <div class="row">
+                  <div class="contain-icon"></div>
+                  <button type="submit" class="post-btn">Post</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!--Followers Posts-->
+      <div class="contain-posts-section">
+        {% if no_posts == 1 %}
+        <div class="container contain-post your_own_post text-center">
+        <h6 class="pt-3"><strong>This is where your latest post will appear.. Start by posting something!</strong></h6> 
+        </div>
+        {% else %}
+        <!--Show your latest post-->
+        <div class="container contain-post your_own_post">
+          <div class="row">
+            <div class="col-3 text-center">
+              <div class="mt-3">
+                <a
+                  href="/users/{{your_own_post['posted_by']}}"
+                  alt="Go to user page"
+                  class="mt-2"
+                  ><img
+                    src="{{your_own_post['post_avatar']}}"
+                    style="height: 30px; width: 30px;"
+                /></a>
+                <ul>
+                  <li>
+                    <i
+                      class="far fa-user pt-1 pr-1 pl-1 mt-2"
+                      style="font-size: 8px;"
+                    ></i
+                    >{{your_own_post['posted_by']}}
+                  </li>
+                  <li>
+                    <i
+                      class="far fa-calendar-alt pr-1 pl-1"
+                      style="font-size: 8px;"
+                    ></i
+                    >{{your_own_post['date_posted']}}
+                  </li>
+                  <!--Some Logic here to display heart icon depending on if the user has liked the post or not-->
+                  {% set liked = namespace(true=0) %}
+                  <!--Some Logic that renders report button depending on if user had reported this post already or not-->
+                  {% for x in your_own_post['liked_by'] %} {% if x == user.username %} {%
+                  set liked.true = 1 %} {% endif %} {% endfor %}
+                  <li>
+                    {% if liked.true == 0 %}
+                    <form method="POST" action="{{url_for('add_like')}}">
+                      <button type="submit" name="id" value="{{your_own_post['_id']}}">
+                        <i class="far fa-heart pr-1 pt-3"></i>
+                      </button>
+                    </form>
+                    <p class="pr-1">({{your_own_post['liked_by']|length}})</p>
+                    {% else %}
+                    <form method="POST" action="{{url_for('remove_like')}}">
+                      <button type="submit" name="id" value="{{your_own_post['_id']}}">
+                        <i
+                          class="fas fa-heart pr-1 pt-3"
+                          style="color: red;"
+                        ></i>
+                      </button>
+                    </form>
+                    <p class="pr-1">({{your_own_post['liked_by']|length}})</p>
+                    {% endif %}
+                  </li>
+                  <!--Conditionally show a reported button to learn more if more than two users report the post-->
+                  {% if your_own_post['reported_by']|length > 1 %}
+                  <li>
+                    <div class="contain-reported">
+                      <i
+                        class="fas fa-exclamation-triangle pr-1 pt-2 warning"
+                        data-toggle="modal"
+                        data-target="#reported_modal"
+                      ></i>
+                    </div>
+                  </li>
+                  {% endif %}
+                </ul>
+              </div>
+            </div>
+            <div class="col-7 main-content-container">
+              {{your_own_post['main_content']}}
+            </div>
+            <div class="col-2">
+              <div class="contain-link text-right">
+                <a href="{{your_own_post['content_link']}}" target="_blank">
+                  <div class="go-to-link shadow-sm mt-2">
+                    <i class="fas fa-link complete-center"></i>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12 contain-arrow-dropdown text-right">
+              <!--Dropdown-->
+              <a
+                data-toggle="dropdown"
+                href="#"
+                class="arrow-down-link"
+                aria-haspopup="true"
+                aria-expanded="false"
+                ><i class="fas fa-sort-down"></i
+              ></a>
+              <div class="dropdown-menu">
+                {% set reported = namespace(true=0) %}
+                <!--Some Logic that renders report button depending on if user had reported this post already or not-->
+                {% for x in your_own_post['reported_by'] %} {% if x == user.username %} {%
+                set reported.true = 1 %} {% endif%} {% endfor %} {% if
+                reported.true == 0 %}
+                <form method="POST" action="{{url_for('report')}}">
+                  <button
+                    class="dropdown-item"
+                    type="submit"
+                    href=""
+                    name="id"
+                    value="{{your_own_post['_id']}}"
+                  >
+                    Report Post<i class="fas fa-flag ml-2"></i>
+                  </button>
+                </form>
+                {% endif %} {% if reported.true == 1 %}
+                <form method="POST" action="{{url_for('remove_report')}}">
+                  <button
+                    type="submit"
+                    class="dropdown-item"
+                    name="id"
+                    value="{{your_own_post['_id']}}"
+                    href="#"
+                  >
+                    Remove Report<i class="fas fa-times ml-2"></i>
+                  </button>
+                </form>
+                {% endif %}
+                <form method="POST" action="{{url_for('delete_post')}}">
+                  <button
+                    type="submit"
+                    class="dropdown-item"
+                    name="post_id"
+                    value="{{your_own_post['_id']}}"
+                    href="#"
+                  >
+                    Delete Post<i class="fas fa-times ml-2"></i>
+                  </button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endif %}
+        <!--Show the user the option to follow people if there is nothing on their feed-->
+        {% if posts_to_display|length < 1 %}
+        <div class="text-center">
+          <h4 class="pt-5">
+            <strong>Looks like you're not following anyone yet!</strong>
+          </h4>
+          <a href="/find"
+            ><button class="big-find-users-2">Find Users to Follow</button></a
+          >
+        </div>
+        {% else %} {% for n in posts_to_display %}
+        <div class="container contain-post">
+          <div class="row">
+            <div class="col-3 text-center">
+              <div class="mt-3">
+                <a
+                  href="/users/{{n['posted_by']}}"
+                  alt="Go to user page"
+                  class="mt-2"
+                  ><img
+                    src="{{n['post_avatar']}}"
+                    style="height: 30px; width: 30px;"
+                /></a>
+                <ul>
+                  <li>
+                    <i
+                      class="far fa-user pt-1 pr-1 pl-1 mt-2"
+                      style="font-size: 8px;"
+                    ></i
+                    >{{n['posted_by']}}
+                  </li>
+                  <li>
+                    <i
+                      class="far fa-calendar-alt pr-1 pl-1"
+                      style="font-size: 8px;"
+                    ></i
+                    >{{n['date_posted']}}
+                  </li>
+                  <!--Some Logic here to display heart icon depending on if the user has liked the post or not-->
+                  {% set liked = namespace(true=0) %}
+                  <!--Some Logic that renders report button depending on if user had reported this post already or not-->
+                  {% for x in n['liked_by'] %} {% if x == user.username %} {%
+                  set liked.true = 1 %} {% endif %} {% endfor %}
+                  <li>
+                    {% if liked.true == 0 %}
+                    <form method="POST" action="{{url_for('add_like')}}">
+                      <button type="submit" name="id" value="{{n['_id']}}">
+                        <i class="far fa-heart pr-1 pt-3"></i>
+                      </button>
+                    </form>
+                    <p class="pr-1">({{n['liked_by']|length}})</p>
+                    {% else %}
+                    <form method="POST" action="{{url_for('remove_like')}}">
+                      <button type="submit" name="id" value="{{n['_id']}}">
+                        <i
+                          class="fas fa-heart pr-1 pt-3"
+                          style="color: red;"
+                        ></i>
+                      </button>
+                    </form>
+                    <p class="pr-1">({{n['liked_by']|length}})</p>
+                    {% endif %}
+                  </li>
+                  <!--Conditionally show a reported button to learn more if more than two users report the post-->
+                  {% if n['reported_by']|length > 1 %}
+                  <li>
+                    <div class="contain-reported">
+                      <i
+                        class="fas fa-exclamation-triangle pr-1 pt-2 warning"
+                        data-toggle="modal"
+                        data-target="#reported_modal"
+                      ></i>
+                    </div>
+                  </li>
+                  {% endif %}
+                </ul>
+              </div>
+            </div>
+            <div class="col-7 main-content-container">
+              {{n['main_content']}}
+            </div>
+            <div class="col-2">
+              <div class="contain-link text-right">
+                <a href="{{n['content_link']}}" target="_blank">
+                  <div class="go-to-link shadow-sm mt-2">
+                    <i class="fas fa-link complete-center"></i>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12 contain-arrow-dropdown text-right">
+              <!--Dropdown-->
+              <a
+                data-toggle="dropdown"
+                href="#"
+                class="arrow-down-link"
+                aria-haspopup="true"
+                aria-expanded="false"
+                ><i class="fas fa-sort-down"></i
+              ></a>
+              <div class="dropdown-menu">
+                {% set reported = namespace(true=0) %}
+                <!--Some Logic that renders report button depending on if user had reported this post already or not-->
+                {% for x in n['reported_by'] %} {% if x == user.username %} {%
+                set reported.true = 1 %} {% endif%} {% endfor %} {% if
+                reported.true == 0 %}
+                <form method="POST" action="{{url_for('report')}}">
+                  <button
+                    class="dropdown-item"
+                    type="submit"
+                    href=""
+                    name="id"
+                    value="{{n['_id']}}"
+                  >
+                    Report Post<i class="fas fa-flag ml-2"></i>
+                  </button>
+                </form>
+                {% endif %} {% if reported.true == 1 %}
+                <form method="POST" action="{{url_for('remove_report')}}">
+                  <button
+                    type="submit"
+                    class="dropdown-item"
+                    name="id"
+                    value="{{n['_id']}}"
+                    href="#"
+                  >
+                    Remove Report<i class="fas fa-times ml-2"></i>
+                  </button>
+                </form>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endfor %} {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+<!--Logout Modal-->
+<div
+  class="modal fade logout-modal"
+  id="logoutModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="logoutLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-body text-center">
+        <h5>Are you sure?</h5>
+      </div>
+      <div class="modal-footer text-center">
+        <div class="col-6 logout">
+          <a href="{{url_for('logout')}}">Logout</a>
+        </div>
+        <div class="col-6">
+          <a href="" data-dismiss="modal">Cancel</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
