@@ -175,6 +175,14 @@ padding: 20px;
     
 }
 
+.login-button {
+    display: block;
+    margin: 0 auto;
+    margin-top: 20px;
+    background-color: #45B5AC !important;
+    color: white !important;
+}
+
 .already-have-account {
     font-size: 14px;
     display: block;
