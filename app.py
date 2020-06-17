@@ -105,10 +105,9 @@ def register_user():
     """
     if 'username' in session:
         return redirect(url_for('dashboard'))
-   
+
     if request.method == 'GET':
         return redirect(url_for('dashboard'))
-
 
     users = mongo.db.users
 
@@ -119,8 +118,6 @@ def register_user():
     existing_user = users.find_one({'username': entered_username})
     existing_email = users.find_one({'email': entered_email})
 
-
-    
     # Check if the username or email already exists
     if existing_user is None and existing_email is None:
         encrypted = bcrypt.hashpw(
@@ -388,9 +385,8 @@ def delete_account():
 
     users = mongo.db.users
     posts = mongo.db.posts
-    user = users.delete_one({'username': session['username']})
-    post = posts.delete_many({'posted_by': session['username']})
-
+    users.delete_one({'username': session['username']})
+    posts.delete_many({'posted_by': session['username']})
 
     session.clear()
     return redirect(url_for('landing'))
@@ -455,4 +451,5 @@ def shorten(shorten_url):
 if __name__ == '__main__':
     app.secret_key = os.environ.get('key')
     app.run(host=os.environ.get('IP'),
-            port=int(os.environ.get('PORT')))
+            port=int(os.environ.get('PORT')),
+            debug=True)

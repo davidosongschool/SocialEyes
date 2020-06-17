@@ -158,11 +158,12 @@ min-height: 50vh;
 padding: 20px;
 }
 
+
 .form-control {
-    width: 80% !important;
-    display: block;
+    width: 60% !important;
     text-align: center;
     margin: 0 auto;
+    display: inline-block;
 }
 
 .register-button {
@@ -185,23 +186,28 @@ padding: 20px;
     color: red;
 }
 
-/* Need to decide what to do with this */
-.learn-more {
-height: 30px;
-width: 100px;
-background-color: #485696;
-color: white;
-position: absolute;
-top: 10px;
-right: 10px;
-line-height: 30px;
-box-shadow: 5px 5px 5px;
-cursor: pointer;
+/* form validation */ 
+
+.username-messages {
+    font-size: 10px;
 }
 
-.learn-more:hover{
-    background-color: #45B5AC;
+.password-messages {
+    font-size: 10px;
 }
+
+
+.valid{
+    color: green;
+}
+
+
+.invalid {
+    color: red;
+}
+
+
+
 
 /* 2. Dashboard ---------------- */ 
 
