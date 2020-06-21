@@ -139,53 +139,81 @@ Things to remember
 
  #### Register / Login (Landing Page)
 
-<img src="/wireframes/landing-desktop.png" width ="300px" alt="landing-page-wireframe">
+Wireframes (Design ideas)
+<br/>
+<img src="/wireframes/Landing-Desktop.png" width ="300px" height="200px;" alt="landing-page-wireframe">
+<img src="/wireframes/landing-page-mobile.png" width ="150px" height="300px;" alt="landing-page-wireframe">
+
 
 1.
 - Function: It should be immediately obvious to the user what steps they can take in order to contintue their experience.
-- Form: We will include a large and visually ovious 'Play Now' option as the most obious next step in the user experience 
+- Form: The user will be immediately met with a register option. If they are familiar with the site and have an account, they can login. 
 
 2.
  - Function - The purpose of the site/app should be immediately obvious 
- - Form - We can include a logo and a title that matches the purpose of the game (Guess that Title / Think you know your movies?)
+ - Form - We can include a logo and a subtitle that describes the purpose of the site. We can also include a 'learn more' button that 
+    will give the user the option to learn about the site before registering. (However, ideally we want people to learn by using the site.
+    The main purpose of the landing page is to encourage registration and provide a sense of intrigue. )
+
+
 3.
- - Function: There should be a 'safety' option immediately obious to the user on landing if they don't understand what the site is about 
- - Form: We can include a large and easy to access 'How to Play' button on the landing page 
 
- 4.
- - Function: The user should have an option to explore, learn more, and contact us
- - Form: We will include a collapsing menu that the user can use to access these functions 
+- Function: The user should be able to register/login with a valid username, password, and email address 
+- Form: We will include a registration form that provides real-time validation on user input 
+
+- The username must be more than 3 characters in length and can only contain letters and numbers (no special characters)
+- The password must be more than 5 characters and must contain at least one number 
+
+- If the username or email has already been registered, the user must get clear feedback
+- We will include a message in red text to provide the user with this feedback 
 
 
- #### How To Play
 
-<img src="readme-images/how-to-play-wire.png" width ="300px" alt="how-to-play-wireframe">
+ #### Dashboard
 
-1. 
-- Function: The user should be able to see an easy to read, visually appealing set of instructions that will provide them with all necessary
-information to play the game 
-- Form: We can include visual instructions for the two key steps in playing the game (Choosing a theme and guessing a title). We can also include 
-information on how many lives the user will have and under what terms they will lose a life. 
+<img src="/wireframes/dashboard.png" width ="150px" height="300px;" alt="landing-page-wireframe">
 
-2. 
-- Function: After reading the instructions, it should be very easy to take the next step and play the game 
-- Form: We can include a Play Now button at the end of the instructions so the user can easily access the game 
-
-#### Learn More 
-
-<img src="readme-images/learn-more-wire.png" width ="300px" alt="learn-more-wireframe">
 
 1. 
-- Function: The user should be easily able to learn the basics of how the app works and the story behind it 
-- Form: We can include information and a link to the OMDB API used by the app. We can also describe the languages used to build the app. 
+- Function: The user should be able to view the latest posts from the users that they follow. 
+- Form: We will display the latest post from each user they are following on the dashboard. 
 
 2. 
-- Function: The user should be able to contact the developer if they have any further questions 
-- Form: We can include a contact us form that allows the user to send us an email
+- Function: The user should be able to select an avatar to use and edit an about me section to display at the top of their profile  
+- Form: We will include an 'About me' section at the top of the dashboard. When the user clicks on the avatar, they will be able to change their avatar from a preset list
 
-#### Display Questions 
+3. 
+- Function: The user should be able to like posts that interest them 
+- Form: We will include a heart icon that the user can press to like a post 
 
-<img src="readme-images/display-question-wireframe.png" width ="300px" alt="display-question-wireframe">
+4. 
+- Function: The user should be able to report a post if they think it isn't suitable to be on the site 
+- Form: We will include a dropdown menu on each post that will allow the user to report a post 
+
+5. 
+- Function: The user should be able to delete a post if it is their own
+- Form: Inside the dropdown menu, we will include an option to delete the post of it belongs to the logged in user 
+
+6. 
+- Function: The user should be able to easily write a post 
+- Form: At the top of the posts section, we will include a post button that will display a modal with a form to post something. 
+
+
+#### Find Users/Follow Users 
+
+<img src="wireframes/find.png" width ="150px" height="300px;" alt="learn-more-wireframe">
+
+1. 
+- Function: The user should be able to search for users to follow and follow them 
+- Form:  We will include a search form where users can enter usernames and search for them - they can then view user profiles and follow users based on search results
+
+2. 
+- Function: The user should be able to view a list of users they are currently following and unfollow them if they wish
+- Form: We will include a 'following tab' where users will see a list of users they currently follow
+
+#### News 
+
+<img src="/wireframes/news.png" width ="150px" height="300px;" alt="display-question-wireframe">
 
 1. 
 - Function: The user should be able to view the question easily and know how to answer it 
@@ -249,6 +277,7 @@ HTML5, CSS3, Javascript, Python
 * <a href="https://www.mongodb.com/">MongoDB</a> - Database 
 * <a href="https://www.npmjs.com/package/bcrypt">Bcrypt</a> - Used for password encryption 
 * <a href="https://pymongo.readthedocs.io/en/stable/"> PyMongo</a> - Used to connect to MongoDB using python
+* <a href="https://newsapi.org/">News API</a> - Used to grab latest news from different countries
 * <a href="https://fontawesome.com/">Font Awesome </a> -Icons 
 * <a href="https://fonts.google.com/">Google Fonts</a> - Typeography 
 * <a href="https://github.com/">GitHub</a> - Used for version control and code hosting - Github pages used to host the final version of the game
