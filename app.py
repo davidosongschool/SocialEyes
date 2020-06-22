@@ -19,18 +19,20 @@ mongo = PyMongo(app)
 users = mongo.db.users
 username = ''
 
-# Not Found Page - Error Handler
-
 
 @app.errorhandler(404)
 def not_found(error):
-
+    """ If page does not exist then link user
+        back to safety
+    """
     return render_template("oops.html")
 
 
 @ app.route('/')
 @ app.route('/landing')
 def landing():
+    """ Display landing page
+    """
     if 'username' in session:
         return redirect(url_for('dashboard'))
     return render_template('landing.html')
@@ -38,7 +40,9 @@ def landing():
 
 @ app.route('/dashboard')
 def dashboard():
-
+    """ Display user information and the latest post
+        from each user in following array
+    """
     if 'username' in session:
         user = users.find_one({'username': session['username']})
         posts = mongo.db.posts
@@ -47,6 +51,7 @@ def dashboard():
             following = user['following']
         posts_to_display = []
         no_posts = 0
+
         # Your own latest post
         your_own_post = posts.find_one({'posted_by': session['username']}, sort=[
             ('_id', -1)])
@@ -67,6 +72,8 @@ def dashboard():
 
 @ app.route('/login')
 def login():
+    """ Display login form
+    """
     if 'username' in session:
         return redirect(url_for('dashboard'))
     return render_template('login.html')
@@ -74,7 +81,8 @@ def login():
 
 @ app.route('/login_user', methods=['POST', 'GET'])
 def login_user():
-
+    """ Check login credentials and create session if correct
+    """
     if request.method == 'GET':
         return redirect(url_for('dashboard'))
 
@@ -95,6 +103,9 @@ def login_user():
 
 @ app.route('/logout')
 def logout():
+    """ This function will destroy the current
+        session and log the user out
+    """
     session.clear()
     return redirect(url_for('landing'))
 
@@ -129,7 +140,6 @@ def register_user():
                           'date_registered': date,
                           'description': 'Tell Us About Yourself',
                           'following': [],
-                          'followers': [],
                           'discover': True,
                           'avatar': 'https://i.ibb.co/syp2Jpw/default-avatar.png'})
 
@@ -142,7 +152,8 @@ def register_user():
 
 @ app.route('/make_post', methods=["POST", 'GET'])
 def make_post():
-
+    """ Insert post data into mongoDB document
+    """
     if request.method == 'GET':
         return redirect(url_for('dashboard'))
 
@@ -169,7 +180,8 @@ def make_post():
 
 @ app.route('/delete_post', methods=['POST', 'GET'])
 def delete_post():
-
+    """ Delete the assocated post
+    """
     if request.method == 'GET':
         return redirect(url_for('dashboard'))
     posts = mongo.db.posts
@@ -179,6 +191,8 @@ def delete_post():
 
 @ app.route('/find')
 def find():
+    """ Get a list of who the user is already following
+    """
     if 'username' not in session:
         return redirect(url_for('landing'))
 
@@ -193,7 +207,8 @@ def find():
 
 @ app.route('/search_results', methods=['POST', 'GET'])
 def search_results():
-
+    """ Displays search results for users
+    """
     if 'username' not in session:
         return redirect(url_for('landing'))
 
@@ -201,7 +216,7 @@ def search_results():
         return redirect(url_for('dashboard'))
 
     searched = request.form['searched_user']
-    # Don't show yourself in search results
+
     my_username = session['username']
     users.mongo.db.users
     user = users.find_one({'username': my_username})
@@ -210,14 +225,14 @@ def search_results():
         following = user['following']
     length = len(following)
     results = users.find({'username': {'$regex': searched, '$options': 'i'}})
-    # Check that they don't already follow them
-    # check if user['following'] contains specific_result.username
+
     return render_template('follow.html', results=results, my_username=my_username, user=user, following=following, length=length)
 
 
 @ app.route('/start_following', methods=['POST', 'GET'])
 def start_following():
-
+    """ Adds a username from following array in the user document
+    """
     if 'username' not in session:
         return redirect(url_for('landing'))
 
@@ -233,7 +248,8 @@ def start_following():
 
 @ app.route('/unfollow', methods=['POST', 'GET'])
 def unfollow():
-
+    """ Removes a username from following array in the user document
+    """
     if 'username' not in session:
         return redirect(url_for('landing'))
 
@@ -249,6 +265,8 @@ def unfollow():
 
 @ app.route('/settings')
 def settings():
+    """ Displays the settings menu to the user
+    """
     if 'username' not in session:
         return redirect(url_for('landing'))
     return render_template('settings.html')
@@ -256,6 +274,8 @@ def settings():
 
 @ app.route('/about_me', methods=['POST', 'GET'])
 def about_me():
+    """ This function updates the 'about me' section
+    """
     if 'username' not in session:
         return redirect(url_for('landing'))
 
@@ -270,9 +290,11 @@ def about_me():
 
 @ app.route('/get_news')
 def get_news():
+    """ This function gets the latest news (ie by default) using the newsapi
+    """
     if 'username' not in session:
         return redirect(url_for('landing'))
-    # Make environment variable for API KEY ?
+
     url = ('http://newsapi.org/v2/top-headlines?'
            'country=ie&'
            'apiKey=a486387335cd46e0a3c0cb8614fdc4ef')
@@ -286,7 +308,8 @@ def get_news():
 
 @ app.route('/change_news', methods=['POST', 'GET'])
 def change_news():
-
+    """ This function changes the country filter on the newsapi request
+    """
     if 'username' not in session:
         return redirect(url_for('landing'))
 
@@ -322,6 +345,9 @@ def change_news():
 
 @ app.route('/change_avatar', methods=['POST', 'GET'])
 def change_avatar():
+    """ This function changes the avatar image url asscoiated
+    with the users profile
+    """
     if 'username' not in session:
         return redirect(url_for('landing'))
 
@@ -337,6 +363,9 @@ def change_avatar():
 
 @ app.route('/users/<username>')
 def display_profile(username):
+    """ This function will display the profile associated with the
+    given username in the url
+    """
     if 'username' not in session:
         return redirect(url_for('landing'))
     username = username.lower()
@@ -346,15 +375,18 @@ def display_profile(username):
     # Check that the user exists
     profile_username = username.lower()
     existing_user = users.find_one({'username': profile_username})
+
     # If User is not found - show error
     if existing_user is None:
         return render_template('oops.html')
 
     posts = mongo.db.posts
     posts_to_display = []
+
     # Find all posts by that user and order them by latest to earliest
     get_posts = posts.find({'posted_by': username}, sort=[
         ('_id', -1)])
+
     # Don't add any blank posts
     if get_posts is not None:
         for n in get_posts:
@@ -367,7 +399,7 @@ def display_profile(username):
         if n == existing_user['username']:
             following = 1
 
-    # Check if its your own profile
+    # Check if it's your own profile
     if username == session['username']:
         following = 2
 
@@ -394,6 +426,9 @@ def delete_account():
 
 @ app.route('/report', methods=['POST', 'GET'])
 def report():
+    """ This function adds the username to the 'reported_by'
+    key in the associated post
+    """
     if request.method == 'GET':
         return redirect(url_for('dashboard'))
 
@@ -405,7 +440,9 @@ def report():
 
 @ app.route('/remove_report', methods=['POST', 'GET'])
 def remove_report():
-
+    """ This function removes the username from the 'reported_by'
+    key in the associated post
+    """
     if request.method == 'GET':
         return redirect(url_for('dashboard'))
 
@@ -417,7 +454,9 @@ def remove_report():
 
 @ app.route('/add_like', methods=['POST', 'GET'])
 def add_like():
-
+    """ This function adds the logged in username to the 'linked_by'
+    array in associated with the post
+    """
     if request.method == 'GET':
         return redirect(url_for('dashboard'))
 
@@ -429,7 +468,9 @@ def add_like():
 
 @ app.route('/remove_like', methods=['POST', 'GET'])
 def remove_like():
-
+    """ This function removes a like from a post and returns
+    the user to the dashboard
+    """
     if request.method == 'GET':
         return redirect(url_for('dashboard'))
 
@@ -440,8 +481,8 @@ def remove_like():
 
 
 def shorten(shorten_url):
-    """ This function takes in a url and shortens it to 25 characters + "..." tp
-    make it for suitable for sharing 
+    """ This function takes in a url and shortens it to 25 characters + "..." to
+        make it for suitable for sharing
     """
     new_url = list(shorten_url)
     new_url = ''.join(shorten_url[:25]) + "..."
