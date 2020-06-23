@@ -93,7 +93,7 @@ function validateUsername() {
     $(".valid-username-chars").removeClass("d-none");
   }
 
-  if ((username.length >= 4 && username.length <=10) && letter_check == true) {
+  if (username.length >= 4 && username.length <= 10 && letter_check == true) {
     validate_user = true;
     $(".validate_username").css("border", "1px solid green");
   } else {
@@ -105,7 +105,6 @@ function validateUsername() {
   if (username.length == 0) {
     $(".validate_username").css("border", "1px solid lightgrey");
     $(".username-messages").addClass("d-none");
-
   }
 
   enableButton();
@@ -115,11 +114,25 @@ function validatePassword() {
   $(".password-messages").removeClass("d-none");
 
   let password = $(".validate_password").val();
+  let confirm = $("#password-confirm").val();
   let p = password.split("");
+
+  if (password != confirm) {
+    $(".validate_password").css("border", "1px solid red");
+    $(".valid-password-match").addClass("d-none");
+    $(".invalid-password-match").removeClass("d-none");
+    validate_pass = false;
+  }
+  else {
+    $(".invalid-password-match").addClass("d-none");
+    $(".valid-password-match").removeClass("d-none");
+  }
 
   if (password.length < 6 && password.length != 0) {
     $(".validate_password").css("border", "1px solid red");
     validate_pass = false;
+  } else {
+    validate_pass = true;
   }
 
   let contains_int = false;
@@ -151,12 +164,12 @@ function validatePassword() {
     validate_pass = false;
   }
 
-  if (password.length >= 6 && contains_int == true) {
+  if (password.length >= 6 && contains_int == true && password == confirm) {
     $(".validate_password").css("border", "1px solid green");
-
     validate_pass = true;
+  } else {
+    validate_pass = false;
   }
-
   // Reset border and messages if nothing is typed
   if (password.length == 0) {
     $(".validate_password").css("border", "1px solid lightgrey");
