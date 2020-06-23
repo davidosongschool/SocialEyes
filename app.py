@@ -67,7 +67,9 @@ def dashboard():
             if latest_post is not None:
                 posts_to_display.extend([latest_post])
 
-        return render_template('dashboard.html', user=user, posts_to_display=posts_to_display, your_own_post=your_own_post, no_posts=no_posts)
+        empty = len(following)
+
+        return render_template('dashboard.html', user=user, posts_to_display=posts_to_display, your_own_post=your_own_post, no_posts=no_posts, empty=empty)
     return render_template('landing.html')
 
 
@@ -493,4 +495,4 @@ def shorten(shorten_url):
 if __name__ == '__main__':
     app.secret_key = os.environ.get('key')
     app.run(host=os.environ.get('IP'),
-            port=int(os.environ.get('PORT')))
+            port=int(os.environ.get('PORT')), debug=True)

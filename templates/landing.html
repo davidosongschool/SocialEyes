@@ -9,7 +9,10 @@
       href="{{url_for('static', filename='css/style.css')}}"
       type="text/css"
     />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css"
+    />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css"
@@ -19,35 +22,132 @@
   </head>
 
   <body>
-    <div class="page-container img-fluid">
-      <div class="row">
-        <div class="learn-more text-center d-none">Learn More</div>
-        <div class="col-12 col-md-6 text-center logo-contain">
-          <img src="static/images/logo.png" class="landing-logo img-fluid" alt="logo" />
-          <h4 class="landing-title d-none d-md-block">SocialEyes</h4>
+    <!--About SocialEyes Modal-->
+    <div
+      class="modal fade about-modal"
+      id="aboutModal"
+      tabindex="-1"
+      role="dialog"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-body text-center">
+            <h5><strong>About SocialEyes</strong></h5>
+            <p style="text-align: left;">
+              SocialEyes is a social media platform designed to encourage people
+              to think about and discuss information they read. Whether it's a
+              video, a news article, an instagram post, a research paper, or a
+              podcast, SocialEyes gives people a platform to share their
+              thoughts about the topic of their choice.
+            </p>
+            <h6><strong>What makes SocialEyes different?</strong></h6>
+            <p style="text-align: left;">
+              SocialEyes is designed differently than most social media media.
+              While most, such as Facebook or Twitter, encourage quantity, we
+              enourage <strong>quality</strong>. We hope to achieve this with a
+              number of features:
+            </p>
+            <ul>
+              <li>
+                <i class="far fa-comments pr-3"></i
+                ><strong>No comments!</strong> Unlike other social media sites,
+                we want the discussions to happen offline. See an article and
+                opinion you find interesting? Show it to your partner and chat
+                about it! We hope this feature will encourage more conversation
+                and reduce 'trolling' and 'keyboard warrior' type behaviour.
+              </li>
+              <li><hr /></li>
+              <li>
+                <i class="fas fa-list pr-3"></i>Only your latest post will show
+                on your followers feed. Make each post count!
+              </li>
+              <li><hr /></li>
+              <li>
+                <i class="fas fa-link pr-3"></i>You must provide a link to the
+                content you are discussing. Our aim is to add credibility to
+                posts and allows other users to form opinions alongside yours!
+              </li>
+            </ul>
+          </div>
+          <div class="modal-footer text-center">
+            <div class="col-12">
+              <a href="" data-dismiss="modal">Close</a>
+            </div>
+          </div>
         </div>
+      </div>
+    </div>
+
+    <div class="page-container img-fluid">
+        <div class="row">
+        <div class="col-12 col-md-6 text-center logo-contain">
+          <img
+            src="static/images/logo.png"
+            class="landing-logo img-fluid"
+            alt="logo"
+          />
+          <button class="d-inline d-md-none learn-more-btn text-center shadow m-2" data-toggle="modal" data-target="#aboutModal">
+            <span class="text-center">?</span>
+          </button>
+          <h4 class="landing-title d-none d-md-block">SocialEyes</h4>
+          <h6 class="sub-title d-none d-md-block">Discover & Discuss</h6>
+          <button class="d-none d-md-inline learn-more-btn text-center shadow m-2" data-toggle="modal" data-target="#aboutModal">
+            <span class="text-center">?</span>
+          </button>
+       
+        </div>
+      
         <!--Contain Register Form-->
         <div
           class="col-12 col-md-6 contain-form contain-register text-center {{bs}}"
         >
-      
-        <h4 class="join-text d-none d-md-block">Join the conversation!</h4>
+        
+          <h4 class="join-text d-none d-md-block">Join the conversation!</h4>
           <ul class="open-menu-list">
             <li class="open-menu pr-1 underline open-menu-signup">Sign Up</li>
             <li class="open-menu pl-1 not-selected open-menu-login">Login</li>
           </ul>
           <h6 class="error_message">{{error}}</h6>
           <div class="col-12 username-messages d-none">
-          <ul>
-          <li>Username is at least 4 characters<i class="fas fa-check-circle  valid valid-username-length pl-2"></i><i class="fas fa-times-circle invalid invalid-username-length pl-2"></i></li>
-          <li>Username only contains numbers and letters<i class="fas fa-check-circle valid valid-username-chars pl-2"></i><i class="fas fa-times-circle invalid invalid-username-chars pl-2"></i></li>
-          </ul>
+            <ul>
+              <li>
+                Username is between 4 and 10 characters<i
+                  class="fas fa-check-circle valid valid-username-length pl-2"
+                ></i
+                ><i
+                  class="fas fa-times-circle invalid invalid-username-length pl-2"
+                ></i>
+              </li>
+              <li>
+                Username only contains numbers and letters<i
+                  class="fas fa-check-circle valid valid-username-chars pl-2"
+                ></i
+                ><i
+                  class="fas fa-times-circle invalid invalid-username-chars pl-2"
+                ></i>
+              </li>
+            </ul>
           </div>
           <div class="col-12 password-messages d-none pb-2">
-          <ul>
-          <li>Password is at least 6 characters<i class="fas fa-check-circle  valid valid-password-length pl-2"></i><i class="fas fa-times-circle invalid invalid-password-length pl-2"></i></li>
-          <li>Password contains at least 1 number<i class="fas fa-check-circle valid valid-password-chars pl-2"></i><i class="fas fa-times-circle invalid invalid-password-chars pl-2"></i></li>
-          </ul>
+            <ul>
+              <li>
+                Password is at least 6 characters<i
+                  class="fas fa-check-circle valid valid-password-length pl-2"
+                ></i
+                ><i
+                  class="fas fa-times-circle invalid invalid-password-length pl-2"
+                ></i>
+              </li>
+              <li>
+                Password contains at least 1 number<i
+                  class="fas fa-check-circle valid valid-password-chars pl-2"
+                ></i
+                ><i
+                  class="fas fa-times-circle invalid invalid-password-chars pl-2"
+                ></i>
+              </li>
+            </ul>
           </div>
           <form method="POST" action="{{ url_for('register_user') }}">
             <div class="row">
@@ -62,7 +162,6 @@
                   oninput="validateUsername()"
                   required
                 />
-               
               </div>
               <div class="col-12 mt-1">
                 <input
@@ -107,7 +206,9 @@
         <div
           class="col-12 contain-form contain-login col-md-6 text-center d-none {{bs2}}"
         >
-         <h4 class="join-text d-none d-md-block">Continue the conversation!</h4>
+          <h4 class="join-text d-none d-md-block">
+            Continue the conversation!
+          </h4>
           <ul class="open-menu-list text-center">
             <li class="open-menu pr-1 not-selected open-menu-signup">
               Sign Up
@@ -166,8 +267,10 @@
       crossorigin="anonymous"
     ></script>
     <script src="static/js/nav.js"></script>
-    <script>$(function () {
-  $('[data-toggle="tooltip"]').tooltip()
-})</script>
+    <script>
+      $(function () {
+        $('[data-toggle="tooltip"]').tooltip();
+      });
+    </script>
   </body>
 </html>

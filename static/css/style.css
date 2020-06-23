@@ -128,16 +128,39 @@ button:focus {
     overflow-x: hidden;
 }
 
+.learn-more-btn {
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    background-color: #485696;
+    color: white;
+    line-height: 40px;
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 24px;
+}
+
+.learn-more-btn:hover {
+background-color: #F9DC5C;
+}
+
 .landing-logo {
     width: 300px;
     height: 300px;
     padding: 20px;
+    padding-bottom: 2px;
 }
 
 .landing-title {
     color: white;
     font-size: 4vw;
 }
+
+.sub-title {
+    color:#485696;
+    font-size: 2vw;
+}
+
 
 .join-text {
     margin-top: -10vh !important;
@@ -559,23 +582,26 @@ font-weight: 500;
 }
 
 .big-find-users {
-    height: 50px;
-    width: 40vw;
+    height: 50px !important;
+    width: 40vw !important;
     background-color: #485696;
-    color: white;
-    margin-top: 50vh;
+    color: white !important;
+    margin-top: 50vh !important;
 }
 
 
 .big-find-users-2 {
-    height: 50px;
-    width: 40vw;
-    background-color:#45B5AC;
-    color: white;
-    margin-top: 5vh;
+    height: 50px !important;
+    width: 40vw !important;
+    background-color:#45B5AC !important;
+    color: white !important;
+    margin-top: 5vh !important;
+    line-height: 50px;
+    font-size: 20px;
+    font-weight: 500;
 }
 .big-find-users-2:hover {
-     background-color: #485696;
+     background-color: #485696 !important;
 }
 
 
@@ -589,9 +615,23 @@ font-weight: 500;
     font-size: 20px;
 }
 
+.search-bar-users {
+    width: 100% !important;
+    text-align: center;
+  
+    display: inline-block;
+}
+
 .submit-search {
-    border: none !important;
-    background-color:transparent !important;
+    color: white;
+    background-color: #45B5AC;
+    width: 100%;
+    height: 40px;
+    margin-top: 10px;
+}
+
+.submit-search:hover {
+      background-color: #485696;
 }
 
 .contain-results {
@@ -694,7 +734,9 @@ font-weight: 500;
    padding-top: 5vh !important;
 }
 
-
+.learn-more-btn  {
+    background-color: #45B5AC;
+}
 
 .logo-contain{
     min-height: 100vh;
@@ -702,6 +744,10 @@ font-weight: 500;
     
 }
 
+.sub-title {
+    color: white;
+    font-size: 1.5vw;
+}
 
 .setting-logo {
     width: 40%;

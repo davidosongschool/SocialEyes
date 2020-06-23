@@ -471,13 +471,16 @@
         </div>
         {% endif %}
         <!--Show the user the option to follow people if there is nothing on their feed-->
-        {% if posts_to_display|length < 1 %}
+        {% if empty == 0 %}
         <div class="text-center">
           <h4 class="pt-5">
             <strong>Looks like you're not following anyone yet!</strong>
           </h4>
-          <a href="/find" class="big-find-users-2">Find Users to Follow</a>
+          <a href="/find">
+          <div class="m-auto big-find-users-2">
+          Find Users
         </div>
+        </a>
         {% else %} {% for n in posts_to_display %}
         <div class="container contain-post">
           <div class="row">

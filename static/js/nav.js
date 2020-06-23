@@ -75,12 +75,12 @@ function validateUsername() {
     }
   }
 
-  if (username.length < 4) {
+  if (username.length < 4 || username.length > 10) {
     $(".validate_username").css("border", "1px solid red");
     validate_user = false;
     $(".invalid-username-length").removeClass("d-none");
     $(".valid-username-length").addClass("d-none");
-  } else if (username.length >= 4) {
+  } else if (username.length >= 4 && username.length <= 10) {
     $(".invalid-username-length").addClass("d-none");
     $(".valid-username-length").removeClass("d-none");
   }
@@ -93,7 +93,7 @@ function validateUsername() {
     $(".valid-username-chars").removeClass("d-none");
   }
 
-  if (username.length >= 4 && letter_check == true) {
+  if ((username.length >= 4 && username.length <=10) && letter_check == true) {
     validate_user = true;
     $(".validate_username").css("border", "1px solid green");
   } else {

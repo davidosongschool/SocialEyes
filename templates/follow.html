@@ -14,14 +14,14 @@
         <div class="col-12 text-center">
           <form action="{{url_for('search_results')}}" method="POST">
             <input
-              class="form-control mt-2 d-inline-block"
+              class="mt-2 d-inline-block search-bar-users"
               type="text"
               name="searched_user"
-              placeholder="Search Username"
+              placeholder="Type Username"
               required
             />
             <button type="submit" class="submit-search">
-              <i class="fas fa-search d-inline-block search-button"></i>
+              Search
             </button>
           </form>
         </div>
