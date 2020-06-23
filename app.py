@@ -47,8 +47,9 @@ def dashboard():
         user = users.find_one({'username': session['username']})
         posts = mongo.db.posts
         following = []
-        if user['following']:
-            following = user['following']
+        if user:
+            if user['following']:
+                following = user['following']
         posts_to_display = []
         no_posts = 0
 
@@ -148,6 +149,7 @@ def register_user():
 
     error = "Username or Email already exists!"
     return render_template('landing.html', error=error)
+
 
 
 @ app.route('/make_post', methods=["POST", 'GET'])
