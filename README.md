@@ -234,10 +234,10 @@ Wireframes (Design ideas)
 
 ### [**Surface**](#surface)
 
-This section is concerned with Typography, Color schemes, imagery, and brand identity 
+This section is concerned with Typography, Color schemes, and Copy
 
 #### Typography 
-/*------ */
+I choose a simple, clean font that is easy to read. 
 
 #### Colour Scheme
 Our colour scheme needs to be fun, invitive, and fresh. It needs to somewhat minic a game since the user will interact with the page alot.
@@ -346,6 +346,7 @@ to a custom 404 page that will provide them with a link back to their dashboard.
 There is a large scope for future features. Some may include:
 - More filter options for news (The API allows you to filter by news source, for examlpe)
 - Custom Avatar building (option to upload their own)
+- Option to be discovered or not in the search results / Option to make profile private and to accept following requests
 
 
 ## Technologies Used 
@@ -362,6 +363,7 @@ HTML5, CSS3, Javascript, Python
 * <a href="https://www.npmjs.com/package/bcrypt">Bcrypt</a> - Used for password encryption 
 * <a href="https://pymongo.readthedocs.io/en/stable/"> PyMongo</a> - Used to connect to MongoDB using python
 * <a href="https://newsapi.org/">News API</a> - Used to grab latest news from different countries
+* <a href="https://github.com/BoxFactura/pulltorefresh.js"> Pull to Refresh JS </a> - Used to add pull down to refresh posts section
 * <a href="https://fontawesome.com/">Font Awesome </a> -Icons 
 * <a href="https://fonts.google.com/">Google Fonts</a> - Typeography 
 * <a href="https://github.com/">GitHub</a> - Used for version control and code hosting - Github pages used to host the final version of the game
@@ -424,9 +426,9 @@ Python unit tests were used to check the following:
 #### Beta Testing 
 A link to a beta version of the site was provided to a small group of people for testing. Any bugs found were then fixed. 
 
-For examlpe, if they user had a username with special characters - this would interfere with finding the user  by using their profile link 
+For examlpe, a bug was discovered when the user had a username with special characters - this would interfere with finding the user by using their profile link 
 
-This was fixed by validating user input to only 
+This was fixed by validating user input to only include letters (A-Z) and numbers (1-9)
 
 ## Deployment 
 
@@ -434,14 +436,23 @@ This was fixed by validating user input to only
 * I used git add . - to add the base directory of project code into the local git repository 
 * I used git commit -m ".." to commit to the local repository with a message containing information on the version 
 * I used git push to push the local repository to the remote repositiry on GitHub
+* I made sure to include a .gitignore file with the file containing sensitive environment variables listed
 
 I took the following steps to deploy my project to Heroku. 
 
-1. 
-2. 
-3. 
-4. 
-5. 
+1. I went to Heroku.com and created an account 
+2. I then created an new App on the Heroku platform 
+3. I navigated to the 'deploy' tab and selected the github button  
+4. I linked my master branch on Github to my Heroku app (with automatic deploys disabled)
+5. After pushing to my master branch using the steps above, I navigated to the github section in the deploy tab 
+6. I scrolled down to the manual deploy and selected the master branch - then clicked 'Deploy Branch'
+7. I waited for the site to deploy
+8. I navigated to the 'config vars' section in the settings tab
+9. I set up the necessary environmental variables for the app and saved them 
+10. I navigated to the app url and tested everything to make sure the app deployed properly
 
 
 ## Credits 
+
+- Pull to Refresh JS code was taken from <a href="https://github.com/BoxFactura/pulltorefresh.js">here</a>. 
+- All content and imagery is original (Icons from FontAwesome)
