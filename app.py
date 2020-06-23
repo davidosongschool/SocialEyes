@@ -151,7 +151,6 @@ def register_user():
     return render_template('landing.html', error=error)
 
 
-
 @ app.route('/make_post', methods=["POST", 'GET'])
 def make_post():
     """ Insert post data into mongoDB document

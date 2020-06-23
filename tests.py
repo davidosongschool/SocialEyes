@@ -1,7 +1,6 @@
 from app import app
 import unittest
 import os
-import re
 from flask_pymongo import PyMongo
 import app as app_module
 
@@ -18,11 +17,12 @@ app_module.mongo = mongo
 
 class AppTestCase(unittest.TestCase):
     """Clean database except admin test login"""
+
     def setUp(self):
         self.client = app.test_client()
         with app.app_context():
-             mongo.db.users.delete_many({'username': 'newUser'}) 
-             mongo.db.posts.delete_many({}) 
+            mongo.db.users.delete_many({'username': 'newUser'})
+            mongo.db.posts.delete_many({})
 
 
 class FlaskTestCase(AppTestCase):
@@ -41,17 +41,18 @@ class FlaskTestCase(AppTestCase):
         response = tester.post('/register_user', data=dict(username="newUser",
                                                            password="myPass123",
                                                            email='newemail@email.com'), follow_redirects=True)
-        # User should be in Dashboard                                                
-        self.assertTrue(b'This is where your latest post will appear.. Start by posting something!' in response.data)                     
-
+        # User should be in Dashboard
+        self.assertTrue(
+            b'This is where your latest post will appear.. Start by posting something!' in response.data)
 
     # Check that user cannot register with existing email
+
     def test_existing_email(self):
         tester = app.test_client(self)
         response = tester.post('/register_user', data=dict(username="newUser",
                                                            password="myPass123",
                                                            email='admin@email.com'), follow_redirects=True)
-        self.assertTrue(b'Username or Email already exists!' in response.data)     
+        self.assertTrue(b'Username or Email already exists!' in response.data)
 
     # Check that login works if creditentials are correct
     def test_login(self):
@@ -66,7 +67,7 @@ class FlaskTestCase(AppTestCase):
     def test_incorrect_login(self):
         tester = app.test_client(self)
         response = tester.post('/login_user', data=dict(username="incorrect",
-                                                           password="incorrect"), follow_redirects=True)
+                                                        password="incorrect"), follow_redirects=True)
         self.assertTrue(b'Incorrect Login! Try Again' in response.data)
 
 
