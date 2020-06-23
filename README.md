@@ -317,7 +317,7 @@ The dashboard is divided into three sections - User Information, Write a post, a
 Each post has a number of interactive features 
 
 - Like/Unlike a post - The user can like a post be clicking on the heart icon - The total number of likes each post has is displayed under the heart icon.
-- Report/Unreport a post - If the user thinks the post of problematic for some reason, they can report a post (and remove that report)
+- Report/Unreport a post - If the user thinks the post of problematic for some reason, they can report a post (and remove that report). If a post receives two or more reports, a 'warning' ison will appear on the post. 
 - Link to content - Each post contains a link icon that will bring the user to the original article/post/video etc being discussed 
 - Delete a post - If the post was written by the logged in user then they will be given the option to delete the post 
 
@@ -387,15 +387,38 @@ All text was checked to make sure it was easily readible on any screen size. Ite
 
 
 #### User Testing
+- I tried to register a new account using a variety of credentials to test that the javascript validation was working 
+- I tried to register a new account with an existing email to check that I got an error message 
+- I registered with valid credentials to check that my account was created successfully 
+- I then logged out and logged back in to the account to ensure logout and login functions were working correctly 
+- I created a post and made sure that it appeared on my dashboard 
+- I navigated to /users/myusername to ensure that my profile was displaying correctly 
+- I created a few accounts and made posts on them 
+- I then logged in to my own account, navigated to the search users section and checked that the other accounts appeared in the search
+- I followed an account and checked that their latest post was displayed on my dashboard 
+- I unfollowed the account and checked that the post was removed from my dashboard 
+- I liked a post to check that the number of likes displayed updated correctly 
+- I reported a post using 2 different accounts to check that the 'post reported' icon displayed on the post 
+- I removed one report to check that the icon disappeared 
+- I deleted a post and checked that it no longer appeared on my profile 
+- I created a post from a news article to check that the correct article was linked in the post 
+- I deleted my account and checked that i could no longer login and that my posts were deleted  
 
 #### Code Validation 
 - HTML code was ran though a HTML validator to ensure there were no errors (https://validator.w3.org/#validate_by_input)
 - CSS code was ran though a CSS validator to ensure there were no errors (https://jigsaw.w3.org/css-validator/#validate_by_input)
 
-#### Jasmine Testing 
 
+#### Unit Testing
 
-#### Python Testing
+Tests can be found at /tests.py
+
+Python unit tests were used to check the following:
+
+- If the user tries to register with valid credentials, they are directed to their dashboard 
+- If the user tries to register with invalid credentials, (email already exists) - they are presented with an error message 
+- If the user tries to login with valid credentials, they are presented with their dashboard
+- If the user tries to login with invaled credentials, they are presented with an error message 
 
 
 #### Beta Testing 
