@@ -1,12 +1,12 @@
 $(".open-menu-signup").click(function () {
-  $(".contain-register").removeClass("d-none");
-  $(".contain-login").addClass("d-none");
+  $(".contain-register").removeClass("d-none").addClass("d-block");
+  $(".contain-login").removeClass("d-block").addClass("d-none");
 });
 
 $(".open-menu-login").click(function () {
   console.log("Click");
-  $(".contain-register").addClass("d-none");
-  $(".contain-login").removeClass("d-none");
+  $(".contain-register").removeClass("d-block").addClass("d-none");
+  $(".contain-login").addClass("d-block").removeClass("d-none");
 });
 
 $(".show-following-menu-button").click(function () {
