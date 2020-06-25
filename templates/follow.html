@@ -28,7 +28,7 @@
       </div>
       <div class="contain-results text-center mx-auto">
         {% for n in results %} {% set render = namespace(total=0) %}
-        <!--Dont show the login in user in the search results-->
+        <!--Dont show the logged in user in the search results-->
         {% if n['username'] != my_username %}
         <div class="row results-row">
           <div class="col-6">
@@ -42,7 +42,6 @@
           </div>
           <div class="col-6">
             {% for x in user['following']%} {% if x == n['username']%}
-            <!--Maybe render unfollow ??-->
             <form action="{{url_for('unfollow')}}" method="POST">
               <button
                 type="submit"

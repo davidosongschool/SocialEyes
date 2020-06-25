@@ -313,11 +313,12 @@ padding: 20px;
 }
 
 .profile-btn {
-    width: 200px !important;
+    width: 100px !important;
     background-color: #45B5AC !important;
     color: white !important;
     border: none !important;
-    float: right;
+    margin-bottom: 10px;
+  
 }
 
 .profile-btn:hover {
@@ -769,5 +770,10 @@ font-weight: 500;
     border-right: 1px solid lightgrey;
 }
 
+
+.profile-btn {
+width: 200px !important;
+float: right !important;
+}
 
 }

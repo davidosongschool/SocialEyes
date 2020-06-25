@@ -349,7 +349,7 @@ def change_news():
 @ app.route('/change_avatar', methods=['POST', 'GET'])
 def change_avatar():
     """ This function changes the avatar image url asscoiated
-    with the users profile
+        with the users profile
     """
     if 'username' not in session:
         return redirect(url_for('landing'))
@@ -367,7 +367,7 @@ def change_avatar():
 @ app.route('/users/<username>')
 def display_profile(username):
     """ This function will display the profile associated with the
-    given username in the url
+        given username in the url
     """
     if 'username' not in session:
         return redirect(url_for('landing'))
@@ -430,7 +430,7 @@ def delete_account():
 @ app.route('/report', methods=['POST', 'GET'])
 def report():
     """ This function adds the username to the 'reported_by'
-    key in the associated post
+        key in the associated post
     """
     if request.method == 'GET':
         return redirect(url_for('dashboard'))
@@ -444,7 +444,7 @@ def report():
 @ app.route('/remove_report', methods=['POST', 'GET'])
 def remove_report():
     """ This function removes the username from the 'reported_by'
-    key in the associated post
+        key in the associated post
     """
     if request.method == 'GET':
         return redirect(url_for('dashboard'))
@@ -458,7 +458,7 @@ def remove_report():
 @ app.route('/add_like', methods=['POST', 'GET'])
 def add_like():
     """ This function adds the logged in username to the 'linked_by'
-    array in associated with the post
+        array in associated with the post
     """
     if request.method == 'GET':
         return redirect(url_for('dashboard'))
@@ -472,7 +472,7 @@ def add_like():
 @ app.route('/remove_like', methods=['POST', 'GET'])
 def remove_like():
     """ This function removes a like from a post and returns
-    the user to the dashboard
+        the user to the dashboard
     """
     if request.method == 'GET':
         return redirect(url_for('dashboard'))

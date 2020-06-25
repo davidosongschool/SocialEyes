@@ -455,4 +455,5 @@ I took the following steps to deploy my project to Heroku.
 ## Credits 
 
 - Pull to Refresh JS code was taken from <a href="https://github.com/BoxFactura/pulltorefresh.js">here</a>. 
-- All content and imagery is original (Icons from FontAwesome)
+- Avatars generated from <a href="https://getavataaars.com/">here</a>
+
